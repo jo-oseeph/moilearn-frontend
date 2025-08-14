@@ -1,0 +1,52 @@
+.how-it-works {
+  background-color: #007bff;
+  padding: 60px 20px;
+  color: white;
+  text-align: center;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.section-title {
+  font-size: 32px;
+  margin-bottom: 40px;
+  font-weight: 600;
+}
+
+.steps {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.step-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 25px;
+  border-radius: 12px;
+  max-width: 300px;
+  transition: 0.3s ease;
+}
+
+.step-card:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-5px);
+}
+
+.step-icon {
+  font-size: 40px;
+  margin-bottom: 15px;
+}
+
+.step-card h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.step-card p {
+  font-size: 16px;
+  line-height: 1.4;
+}

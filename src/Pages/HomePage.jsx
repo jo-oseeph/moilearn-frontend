@@ -1,0 +1,24 @@
+import React from 'react'
+import Navbar from '../components/Navbar'  
+import Hero from '../components/Hero' 
+import LatestUploads from '../components/LatestUploads'
+import HowItWorks from '../components/HowItWorks'
+// import FeaturesSection from '../components/FeaturesSection'
+import CTASection from '../components/CTASection'
+import Footer from '../components/Footer'
+
+
+export const HomePage = () => {
+  return (
+    <div>
+        <Navbar/>
+        <Hero/>
+        <HowItWorks/> 
+        <LatestUploads/>
+        {/* <FeaturesSection/>  */}
+        <CTASection/>
+        <Footer/>
+
+    </div>
+  )
+}
