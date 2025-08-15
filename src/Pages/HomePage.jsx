@@ -2,10 +2,12 @@ import React from 'react'
 import Navbar from '../components/Navbar'  
 import Hero from '../components/Hero' 
 import LatestUploads from '../components/LatestUploads'
-import HowItWorks from '../components/HowItWorks'
+// import HowItWorks from '../components/HowItWorks'
 // import FeaturesSection from '../components/FeaturesSection'
+import StatsSection from '../components/StatsSection' 
 import CTASection from '../components/CTASection'
 import Footer from '../components/Footer'
+
 
 
 export const HomePage = () => {
@@ -13,7 +15,8 @@ export const HomePage = () => {
     <div>
         <Navbar/>
         <Hero/>
-        <HowItWorks/> 
+        <StatsSection/>
+        {/* <HowItWorks/>  */}
         <LatestUploads/>
         {/* <FeaturesSection/>  */}
         <CTASection/>
