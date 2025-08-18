@@ -12,7 +12,7 @@ import Footer from '../components/Footer'
 
 export const HomePage = () => {
   return (
-    <div>
+    <div>                                                                                                                               
         <Navbar/>
         <Hero/>
         <StatsSection/>

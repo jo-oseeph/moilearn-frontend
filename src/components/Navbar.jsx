@@ -1,65 +1,51 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Navbar.css'; 
 import { Menu, X, Home, BookOpen, FileText, GraduationCap, Upload, User, LogOut, Settings } from 'lucide-react';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+
   // Mock authentication state - replace with your actual auth logic
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState({ name: 'John Doe', email: 'john@example.com' });
+  const [user] = useState({ name: 'John Doe', email: 'john@example.com' });
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  const handleLogin = () => {
-    // Mock login - replace with actual login logic
-    setIsLoggedIn(true);
-    setIsMenuOpen(false);
-  };
-
-  const handleLogout = () => {
-    // Mock logout - replace with actual logout logic
-    setIsLoggedIn(false);
-    setIsMenuOpen(false);
-  };
-
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const handleLogin = () => setIsLoggedIn(true);
+  const handleLogout = () => setIsLoggedIn(false);
+  const closeMenu = () => setIsMenuOpen(false);
 
   return (
     <nav className="navbar">
       <div className="nav-container">
         {/* Logo */}
-        <a href="/" className="nav-logo">
+        <Link to="/" className="nav-logo">
           moilearn
-        </a>
+        </Link>
 
         {/* Desktop Navigation Links */}
         <div className="nav-links">
-          <a href="/" className="nav-link">
+          <Link to="/" className="nav-link">
             <Home size={18} />
             Home
-          </a>
-          <a href="/notes" className="nav-link">
+          </Link>
+          <Link to="/notes" className="nav-link">
             <BookOpen size={18} />
             Notes
-          </a>
-          <a href="/past-papers" className="nav-link">
+          </Link>
+          <Link to="/past-papers" className="nav-link">
             <FileText size={18} />
             Past Papers
-          </a>
-          <a href="/schools" className="nav-link">
+          </Link>
+          <Link to="/schools" className="nav-link">
             <GraduationCap size={18} />
             Schools
-          </a>
+          </Link>
           {isLoggedIn && (
-            <a href="/upload" className="nav-link">
+            <Link to="/upload" className="nav-link">
               <Upload size={18} />
               Upload
-            </a>
+            </Link>
           )}
         </div>
 
@@ -72,14 +58,14 @@ const Navbar = () => {
                 <span>{user.name}</span>
               </div>
               <div className="user-dropdown">
-                <a href="/profile" className="dropdown-item">
+                <Link to="/profile" className="dropdown-item">
                   <User size={16} />
                   Profile
-                </a>
-                <a href="/settings" className="dropdown-item">
+                </Link>
+                <Link to="/settings" className="dropdown-item">
                   <Settings size={16} />
                   Settings
-                </a>
+                </Link>
                 <button onClick={handleLogout} className="dropdown-item logout-btn">
                   <LogOut size={16} />
                   Logout
@@ -91,9 +77,9 @@ const Navbar = () => {
               <button onClick={handleLogin} className="login-btn">
                 Login
               </button>
-              <a href="/signup" className="signup-btn">
+              <Link to="/signup" className="signup-btn">
                 Sign Up
-              </a>
+              </Link>
             </div>
           )}
         </div>
@@ -108,27 +94,27 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="mobile-menu">
           <div className="mobile-nav-links">
-            <a href="/" className="mobile-nav-link" onClick={closeMenu}>
+            <Link to="/" className="mobile-nav-link" onClick={closeMenu}>
               <Home size={18} />
               Home
-            </a>
-            <a href="/notes" className="mobile-nav-link" onClick={closeMenu}>
+            </Link>
+            <Link to="/notes" className="mobile-nav-link" onClick={closeMenu}>
               <BookOpen size={18} />
               Notes
-            </a>
-            <a href="/past-papers" className="mobile-nav-link" onClick={closeMenu}>
+            </Link>
+            <Link to="/past-papers" className="mobile-nav-link" onClick={closeMenu}>
               <FileText size={18} />
               Past Papers
-            </a>
-            <a href="/schools" className="mobile-nav-link" onClick={closeMenu}>
+            </Link>
+            <Link to="/schools" className="mobile-nav-link" onClick={closeMenu}>
               <GraduationCap size={18} />
               Schools
-            </a>
+            </Link>
             {isLoggedIn && (
-              <a href="/upload" className="mobile-nav-link" onClick={closeMenu}>
+              <Link to="/upload" className="mobile-nav-link" onClick={closeMenu}>
                 <Upload size={18} />
                 Upload
-              </a>
+              </Link>
             )}
           </div>
 
@@ -139,14 +125,14 @@ const Navbar = () => {
                   <User size={18} />
                   <span>{user.name}</span>
                 </div>
-                <a href="/profile" className="mobile-nav-link" onClick={closeMenu}>
+                <Link to="/profile" className="mobile-nav-link" onClick={closeMenu}>
                   <User size={18} />
                   Profile
-                </a>
-                <a href="/settings" className="mobile-nav-link" onClick={closeMenu}>
+                </Link>
+                <Link to="/settings" className="mobile-nav-link" onClick={closeMenu}>
                   <Settings size={18} />
                   Settings
-                </a>
+                </Link>
                 <button onClick={handleLogout} className="mobile-logout-btn">
                   <LogOut size={18} />
                   Logout
@@ -157,9 +143,9 @@ const Navbar = () => {
                 <button onClick={handleLogin} className="mobile-login-btn">
                   Login
                 </button>
-                <a href="/signup" className="mobile-signup-btn" onClick={closeMenu}>
+                <Link to="/signup" className="mobile-signup-btn" onClick={closeMenu}>
                   Sign Up
-                </a>
+                </Link>
               </div>
             )}
           </div>
