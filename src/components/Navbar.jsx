@@ -1,19 +1,50 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css'; 
 import { Menu, X, Home, BookOpen, FileText, GraduationCap, Upload, User, LogOut, Settings } from 'lucide-react';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  // Mock authentication state - replace with your actual auth logic
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user] = useState({ name: 'John Doe', email: 'john@example.com' });
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  // Check auth state on mount
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    const storedUser = localStorage.getItem('userData');
+
+    if (token && storedUser) {
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        setIsLoggedIn(true);
+        setUser(parsedUser);
+      } catch (err) {
+        console.error("Invalid userData in localStorage:", err);
+        // Clean up corrupted data
+        localStorage.removeItem('userData');
+        setIsLoggedIn(false);
+        setUser(null);
+      }
+    }
+  }, []);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  const handleLogin = () => setIsLoggedIn(true);
-  const handleLogout = () => setIsLoggedIn(false);
   const closeMenu = () => setIsMenuOpen(false);
+
+  const handleLogout = () => {
+    // Clear local storage
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userData');
+    localStorage.removeItem('tokenExpiration');
+
+    // Update state
+    setIsLoggedIn(false);
+    setUser(null);
+
+    // Redirect to login
+    navigate('/login');
+  };
 
   return (
     <nav className="navbar">
@@ -55,7 +86,7 @@ const Navbar = () => {
             <div className="user-menu">
               <div className="user-info">
                 <User size={18} />
-                <span>{user.name}</span>
+                <span>{user?.name}</span>
               </div>
               <div className="user-dropdown">
                 <Link to="/profile" className="dropdown-item">
@@ -74,9 +105,9 @@ const Navbar = () => {
             </div>
           ) : (
             <div className="auth-buttons">
-              <button onClick={handleLogin} className="login-btn">
+              <Link to="/login" className="login-btn">
                 Login
-              </button>
+              </Link>
               <Link to="/signup" className="signup-btn">
                 Sign Up
               </Link>
@@ -123,7 +154,7 @@ const Navbar = () => {
               <div className="mobile-user-section">
                 <div className="mobile-user-info">
                   <User size={18} />
-                  <span>{user.name}</span>
+                  <span>{user?.name}</span>
                 </div>
                 <Link to="/profile" className="mobile-nav-link" onClick={closeMenu}>
                   <User size={18} />
@@ -140,9 +171,9 @@ const Navbar = () => {
               </div>
             ) : (
               <div className="mobile-auth-buttons">
-                <button onClick={handleLogin} className="mobile-login-btn">
+                <Link to="/login" className="mobile-login-btn" onClick={closeMenu}>
                   Login
-                </button>
+                </Link>
                 <Link to="/signup" className="mobile-signup-btn" onClick={closeMenu}>
                   Sign Up
                 </Link>
