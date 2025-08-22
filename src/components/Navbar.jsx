@@ -1,185 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import './Navbar.css'; 
-import { Menu, X, Home, BookOpen, FileText, GraduationCap, Upload, User, LogOut, Settings } from 'lucide-react';
+// src/components/Navbar.jsx
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import "./Navbar.css";
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate();
-
-  // Check auth state on mount
-  useEffect(() => {
-    const token = localStorage.getItem('authToken');
-    const storedUser = localStorage.getItem('userData');
-
-    if (token && storedUser) {
-      try {
-        const parsedUser = JSON.parse(storedUser);
-        setIsLoggedIn(true);
-        setUser(parsedUser);
-      } catch (err) {
-        console.error("Invalid userData in localStorage:", err);
-        // Clean up corrupted data
-        localStorage.removeItem('userData');
-        setIsLoggedIn(false);
-        setUser(null);
-      }
-    }
-  }, []);
-
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  const closeMenu = () => setIsMenuOpen(false);
-
-  const handleLogout = () => {
-    // Clear local storage
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('userData');
-    localStorage.removeItem('tokenExpiration');
-
-    // Update state
-    setIsLoggedIn(false);
-    setUser(null);
-
-    // Redirect to login
-    navigate('/login');
-  };
+  const { isLoggedIn, user, logout } = useAuth();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   return (
     <nav className="navbar">
-      <div className="nav-container">
-        {/* Logo */}
-        <Link to="/" className="nav-logo">
-          moilearn
-        </Link>
+      <Link to="/">Home</Link>
+      <Link to="/dashboard">Dashboard</Link>
 
-        {/* Desktop Navigation Links */}
-        <div className="nav-links">
-          <Link to="/" className="nav-link">
-            <Home size={18} />
-            Home
-          </Link>
-          <Link to="/notes" className="nav-link">
-            <BookOpen size={18} />
-            Notes
-          </Link>
-          <Link to="/past-papers" className="nav-link">
-            <FileText size={18} />
-            Past Papers
-          </Link>
-          <Link to="/schools" className="nav-link">
-            <GraduationCap size={18} />
-            Schools
-          </Link>
-          {isLoggedIn && (
-            <Link to="/upload" className="nav-link">
-              <Upload size={18} />
-              Upload
-            </Link>
-          )}
-        </div>
-
-        {/* Desktop Auth Section */}
-        <div className="nav-auth">
-          {isLoggedIn ? (
-            <div className="user-menu">
-              <div className="user-info">
-                <User size={18} />
-                <span>{user?.name}</span>
-              </div>
-              <div className="user-dropdown">
-                <Link to="/profile" className="dropdown-item">
-                  <User size={16} />
-                  Profile
-                </Link>
-                <Link to="/settings" className="dropdown-item">
-                  <Settings size={16} />
-                  Settings
-                </Link>
-                <button onClick={handleLogout} className="dropdown-item logout-btn">
-                  <LogOut size={16} />
-                  Logout
-                </button>
-              </div>
-            </div>
-          ) : (
-            <div className="auth-buttons">
-              <Link to="/login" className="login-btn">
-                Login
-              </Link>
-              <Link to="/signup" className="signup-btn">
-                Sign Up
-              </Link>
+      {!isLoggedIn ? (
+        <>
+          <Link to="/login">Login</Link>
+          <Link to="/register">Register</Link>
+        </>
+      ) : (
+        <div className="profile-menu">
+          <button onClick={() => setDropdownOpen(!dropdownOpen)}>
+            👤 {user?.name || user?.email}
+          </button>
+          {dropdownOpen && (
+            <div className="dropdown">
+              <Link to="/dashboard">My Dashboard</Link>
+              <Link to="/settings">Settings</Link>
+              <button onClick={logout}>Logout</button>
             </div>
           )}
-        </div>
-
-        {/* Mobile Menu Button */}
-        <button className="mobile-menu-btn" onClick={toggleMenu}>
-          {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
-
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="mobile-menu">
-          <div className="mobile-nav-links">
-            <Link to="/" className="mobile-nav-link" onClick={closeMenu}>
-              <Home size={18} />
-              Home
-            </Link>
-            <Link to="/notes" className="mobile-nav-link" onClick={closeMenu}>
-              <BookOpen size={18} />
-              Notes
-            </Link>
-            <Link to="/past-papers" className="mobile-nav-link" onClick={closeMenu}>
-              <FileText size={18} />
-              Past Papers
-            </Link>
-            <Link to="/schools" className="mobile-nav-link" onClick={closeMenu}>
-              <GraduationCap size={18} />
-              Schools
-            </Link>
-            {isLoggedIn && (
-              <Link to="/upload" className="mobile-nav-link" onClick={closeMenu}>
-                <Upload size={18} />
-                Upload
-              </Link>
-            )}
-          </div>
-
-          <div className="mobile-auth">
-            {isLoggedIn ? (
-              <div className="mobile-user-section">
-                <div className="mobile-user-info">
-                  <User size={18} />
-                  <span>{user?.name}</span>
-                </div>
-                <Link to="/profile" className="mobile-nav-link" onClick={closeMenu}>
-                  <User size={18} />
-                  Profile
-                </Link>
-                <Link to="/settings" className="mobile-nav-link" onClick={closeMenu}>
-                  <Settings size={18} />
-                  Settings
-                </Link>
-                <button onClick={handleLogout} className="mobile-logout-btn">
-                  <LogOut size={18} />
-                  Logout
-                </button>
-              </div>
-            ) : (
-              <div className="mobile-auth-buttons">
-                <Link to="/login" className="mobile-login-btn" onClick={closeMenu}>
-                  Login
-                </Link>
-                <Link to="/signup" className="mobile-signup-btn" onClick={closeMenu}>
-                  Sign Up
-                </Link>
-              </div>
-            )}
-          </div>
         </div>
       )}
     </nav>
