@@ -12,7 +12,7 @@ const ProtectedRoute = ({ children, requiredRole }) => {
 
   if (requiredRole && role !== requiredRole) {
     // Optionally, redirect unauthorized users to their dashboard or a 403 page
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to="/forbidden" replace />;
   }
 
   return children;

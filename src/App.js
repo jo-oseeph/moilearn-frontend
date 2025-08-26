@@ -10,6 +10,7 @@ import Login from './Pages/Login';
 import Register from './Pages/Register';
 import Dashboard from './Pages/Dashboard';
 import AdminDashboard from './Pages/AdminDashboard'; // Added import
+import Forbidden from './Pages/ForbiddenPage';
 
 function App() {
   return (
@@ -23,17 +24,17 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
-              {/* <Route path="/admin" element={<AdminDashboard />} />  */}
+              <Route path="/forbidden" element={<Forbidden />} />
 
               {/* Protected routes */}
-              <Route 
-                path="/dashboard" 
-                element={
-                  <ProtectedRoute>
-                    <Dashboard />
-                  </ProtectedRoute>
-                } 
-              />
+             <Route 
+  path="/dashboard" 
+  element={
+    <ProtectedRoute requiredRole="user">
+      <Dashboard />
+    </ProtectedRoute>
+  } 
+/>
               <Route 
                 path="/admin/dashboard" 
                 element={
