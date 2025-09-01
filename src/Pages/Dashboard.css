@@ -98,10 +98,15 @@
 }
 
 /* Stats Grid */
-.stats-grid {
+.centered-stats {
   display: flex;
-  gap: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin: 2rem 0;
+  text-align: center;
 }
+
 
 @media (min-width: 768px) {
   .stats-grid {
@@ -377,6 +382,10 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+}
+.username-blue {
+  color: #1976d2; /* or any blue shade you prefer */
+  font-weight: 600;
 }
 
 /* Mobile Responsive Adjustments */

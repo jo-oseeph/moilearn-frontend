@@ -164,60 +164,32 @@ const Dashboard = () => {
     <div className="dashboard-container">
       <div className="dashboard-content">
         {/* Header Section */}
-        <header className="dashboard-header">
-          <h1 className="welcome-title">
-            Welcome back, {user?.username || 'User'}!
-          </h1>
-          <p className="welcome-subtitle">
-            Here's what's happening with your notes today.
-          </p>
-        </header>
+       <header className="dashboard-header">
+  <h1 className="welcome-title">
+    Welcome back, <span className="username-blue">{user?.username || 'User'} </span>
+  </h1>
+  <p className="welcome-subtitle">
+    Here's what's happening with your notes today.
+  </p>
+</header>
 
-        {/* User Info & Stats Section */}
-        <div className="user-info-card">
-          <div className="user-info-section">
-            {/* User Profile */}
-            <div className="user-profile">
-        {
-  user?.profilePicture || user?.avatar ? (
-    <img
-      src={user?.profilePicture || user?.avatar}
-      alt={user?.name || "User"}
-      className="profile-avatar"
-      onError={(e) => {
-        e.target.src = "https://via.placeholder.com/150";
-      }}
-    />
-  ) : (
-    <div className="profile-avatar-circle">
-      <User size={40} color="#888" />
+      {/* User Info & Stats Section */}
+<div className="user-info-card">
+  <div className="stats-grid centered-stats">
+    <div className="stat-item uploaded">
+      <div className="stat-number">{stats.notesUploaded}</div>
+      <div className="stat-label">Uploaded</div>
     </div>
-  )
-}
-
-              <div className="user-details">
-                <h2 className="user-name">{user?.username || 'User'}</h2>
-                {/* <p className="user-username">@{user?.username || 'username'}</p> */}
-              </div>
-            </div>
-
-            {/* Quick Stats */}
-            <div className="stats-grid">
-              <div className="stat-item uploaded">
-                <div className="stat-number">{stats.notesUploaded}</div>
-                <div className="stat-label">Uploaded</div>
-              </div>
-              <div className="stat-item downloaded">
-                <div className="stat-number">{stats.notesDownloaded}</div>
-                <div className="stat-label">Downloaded</div>
-              </div>
-              <div className="stat-item bookmarked">
-                <div className="stat-number">{stats.notesBookmarked}</div>
-                <div className="stat-label">Bookmarked</div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div className="stat-item downloaded">
+      <div className="stat-number">{stats.notesDownloaded}</div>
+      <div className="stat-label">Downloaded</div>
+    </div>
+    <div className="stat-item bookmarked">
+      <div className="stat-number">{stats.notesBookmarked}</div>
+      <div className="stat-label">Bookmarked</div>
+    </div>
+  </div>
+</div>
 
         {/* Features Grid */}
         <div className="features-grid">
