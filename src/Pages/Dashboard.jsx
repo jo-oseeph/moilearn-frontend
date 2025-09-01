@@ -1,23 +1,160 @@
-// src/pages/Dashboard.jsx
-import React from 'react';
-import { useAuth } from '../context/AuthContext';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { 
+  Upload, 
+  FileText, 
+  Search, 
+  User, 
+  Bell, 
+  Settings, 
+  LogOut
+} from 'lucide-react';
 import './Dashboard.css';
 
-/**
- * IMPORTANT:
- * This component no longer checks/reads localStorage or redirects.
- * Access protection is handled by <ProtectedRoute>.
- * This removes the parse error + redirect loop that caused the "shake".
- */
 const Dashboard = () => {
-  const { user, isLoading, logout } = useAuth();
+  const [user, setUser] = useState(null);
+  const [stats, setStats] = useState({
+    notesUploaded: 0,
+    notesDownloaded: 0,
+    notesBookmarked: 0
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  if (isLoading) {
+  // Fetch user data and stats from backend
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        setLoading(true);
+        
+        // Get user profile
+        const userResponse = await fetch('/api/user/profile', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('moilearn_token')}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        
+        if (!userResponse.ok) {
+          throw new Error('Failed to fetch user data');
+        }
+        
+        const userData = await userResponse.json();
+        setUser(userData);
+
+        // Get user stats
+        const statsResponse = await fetch('/api/user/stats', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('moilearn_token')}`,
+            'Content-Type': 'application/json'
+          }
+        });
+        
+        if (!statsResponse.ok) {
+          throw new Error('Failed to fetch stats');
+        }
+        
+        const statsData = await statsResponse.json();
+        setStats(statsData);
+        
+      } catch (err) {
+        setError(err.message);
+        console.error('Dashboard data fetch error:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDashboardData();
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/auth/logout', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      localStorage.removeItem('token');
+      window.location.href = '/login';
+    } catch (err) {
+      console.error('Logout error:', err);
+      // Force logout even if API call fails
+      localStorage.removeItem('token');
+      window.location.href = '/login';
+    }
+  };
+
+  const features = [
+    {
+      title: "Upload Notes",
+      path: "/upload",
+      icon: Upload,
+      description: "Share your notes with others",
+      className: "feature-card upload-card"
+    },
+    {
+      title: "My Notes",
+      path: "/my-notes",
+      icon: FileText,
+      description: "View and manage your notes",
+      className: "feature-card my-notes-card"
+    },
+    {
+      title: "Browse Notes",
+      path: "/browse",
+      icon: Search,
+      description: "Discover notes from others",
+      className: "feature-card browse-card"
+    },
+    {
+      title: "Profile",
+      path: "/profile",
+      icon: User,
+      description: "Manage your account",
+      className: "feature-card profile-card"
+    },
+    {
+      title: "Notifications",
+      path: "/notifications",
+      icon: Bell,
+      description: "View your notifications",
+      className: "feature-card notifications-card"
+    },
+    {
+      title: "Settings",
+      path: "/settings",
+      icon: Settings,
+      description: "Configure your preferences",
+      className: "feature-card settings-card"
+    }
+  ];
+
+  if (loading) {
     return (
       <div className="dashboard-container">
         <div className="loading-spinner">
           <div className="spinner"></div>
-          <p>Loading dashboard...</p>
+          <p>Loading your dashboard...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="dashboard-container">
+        <div className="error-message">
+          <h2>Unable to load dashboard</h2>
+          <p>{error}</p>
+          <button onClick={() => window.location.reload()} className="retry-btn">
+            Try Again
+          </button>
         </div>
       </div>
     );
@@ -25,106 +162,92 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <div className="dashboard-header">
-        <h1>Welcome to Your Dashboard</h1>
-        {user && (
-          <div className="user-welcome">
-            <p>Hello, {user.name || user.username || user.email || 'User'}!</p>
-            {user.email && <p className="user-email">{user.email}</p>}
-          </div>
-        )}
-      </div>
-
       <div className="dashboard-content">
-        <div className="dashboard-grid">
-          {/* Quick Stats */}
-          <div className="dashboard-card">
-            <h3>Quick Stats</h3>
-            <div className="stats">
-              <div className="stat-item">
-                <span className="stat-number">12</span>
-                <span className="stat-label">Notes Uploaded</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">5</span>
-                <span className="stat-label">Past Papers</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">8</span>
-                <span className="stat-label">Downloads</span>
+        {/* Header Section */}
+        <header className="dashboard-header">
+          <h1 className="welcome-title">
+            Welcome back, {user?.username || 'User'}!
+          </h1>
+          <p className="welcome-subtitle">
+            Here's what's happening with your notes today.
+          </p>
+        </header>
+
+        {/* User Info & Stats Section */}
+        <div className="user-info-card">
+          <div className="user-info-section">
+            {/* User Profile */}
+            <div className="user-profile">
+        {
+  user?.profilePicture || user?.avatar ? (
+    <img
+      src={user?.profilePicture || user?.avatar}
+      alt={user?.name || "User"}
+      className="profile-avatar"
+      onError={(e) => {
+        e.target.src = "https://via.placeholder.com/150";
+      }}
+    />
+  ) : (
+    <div className="profile-avatar-circle">
+      <User size={40} color="#888" />
+    </div>
+  )
+}
+
+              <div className="user-details">
+                <h2 className="user-name">{user?.username || 'User'}</h2>
+                {/* <p className="user-username">@{user?.username || 'username'}</p> */}
               </div>
             </div>
-          </div>
 
-          {/* Recent Activity */}
-          <div className="dashboard-card">
-            <h3>Recent Activity</h3>
-            <div className="activity-list">
-              <div className="activity-item">
-                <div className="activity-icon">📝</div>
-                <div className="activity-content">
-                  <p>Uploaded Mathematics notes</p>
-                  <span className="activity-time">2 hours ago</span>
-                </div>
+            {/* Quick Stats */}
+            <div className="stats-grid">
+              <div className="stat-item uploaded">
+                <div className="stat-number">{stats.notesUploaded}</div>
+                <div className="stat-label">Uploaded</div>
               </div>
-              <div className="activity-item">
-                <div className="activity-icon">📄</div>
-                <div className="activity-content">
-                  <p>Downloaded Physics past paper</p>
-                  <span className="activity-time">1 day ago</span>
-                </div>
+              <div className="stat-item downloaded">
+                <div className="stat-number">{stats.notesDownloaded}</div>
+                <div className="stat-label">Downloaded</div>
               </div>
-              <div className="activity-item">
-                <div className="activity-icon">🎓</div>
-                <div className="activity-content">
-                  <p>Joined Chemistry study group</p>
-                  <span className="activity-time">3 days ago</span>
-                </div>
+              <div className="stat-item bookmarked">
+                <div className="stat-number">{stats.notesBookmarked}</div>
+                <div className="stat-label">Bookmarked</div>
               </div>
-            </div>
-          </div>
-
-          {/* Quick Actions */}
-          <div className="dashboard-card">
-            <h3>Quick Actions</h3>
-            <div className="action-buttons">
-              <button className="action-btn primary">📤 Upload Notes</button>
-              <button className="action-btn secondary">🔍 Browse Past Papers</button>
-              <button className="action-btn secondary">👥 Find Study Groups</button>
-            </div>
-          </div>
-
-          {/* Profile Summary */}
-          <div className="dashboard-card">
-            <h3>Profile Summary</h3>
-            <div className="profile-summary">
-              <>
-                <div className="profile-item">
-                  <strong>Name:</strong> {user?.name || user?.username || 'Not provided'}
-                </div>
-                <div className="profile-item">
-                  <strong>Email:</strong> {user?.email || 'Not provided'}
-                </div>
-                <div className="profile-item">
-                  <strong>School:</strong> {user?.school || 'Not provided'}
-                </div>
-                <div className="profile-item">
-                  <strong>Level:</strong> {user?.level || 'Not provided'}
-                </div>
-              </>
-              <button className="edit-profile-btn">Edit Profile</button>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Debug (dev only) */}
-      <div className="debug-info" style={{ margin: '20px 0', padding: '10px', background: '#f0f0f0', fontSize: '12px' }}>
-        <strong>Debug Info:</strong>
-        <p>Authenticated: {String(Boolean(user))}</p>
-        <button onClick={logout} style={{ marginTop: '10px', padding: '5px 10px' }}>
-          Logout (Debug)
-        </button>
+        {/* Features Grid */}
+        <div className="features-grid">
+          {features.map((feature) => {
+            const IconComponent = feature.icon;
+            return (
+              <Link
+                key={feature.path}
+                to={feature.path}
+                className={feature.className}
+              >
+                <div className="feature-content">
+                  <div className="feature-icon">
+                    <IconComponent size={32} />
+                  </div>
+                  <h3 className="feature-title">{feature.title}</h3>
+                  <p className="feature-description">{feature.description}</p>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+
+        {/* Logout Section */}
+        <div className="logout-section">
+          <button onClick={handleLogout} className="logout-btn">
+            <LogOut size={20} />
+            <span>Logout</span>
+          </button>
+        </div>
       </div>
     </div>
   );
