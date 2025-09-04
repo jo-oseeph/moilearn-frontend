@@ -1,0 +1,118 @@
+/* UploadNotePage.css */
+
+.upload-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: "Poppins", sans-serif;
+}
+
+.page-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #0b2153;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.file-dropzone {
+  border: 2px dashed #f94023;
+  padding: 30px;
+  text-align: center;
+  border-radius: 8px;
+  background: #fff8f7;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.file-dropzone:hover {
+  background: #ffeceb;
+}
+
+.file-preview {
+  background: #f9f9f9;
+  padding: 15px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.progress-bar {
+  height: 8px;
+  background: #eee;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #f94023;
+  transition: width 0.3s ease-in-out;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.success-message {
+  color: green;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+button {
+  background: #f94023;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background: #d7301c;
+}
