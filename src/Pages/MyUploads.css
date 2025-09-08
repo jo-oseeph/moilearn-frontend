@@ -18,10 +18,8 @@
   transform: translateY(-4px);
 }
 
-.upload-title {
-  font-size: 1.1rem;
-  margin-bottom: 6px;
-  color: #0b2153;
+.title-blue {
+  color: #007bff; /* blue for title */
 }
 
 .upload-date {
