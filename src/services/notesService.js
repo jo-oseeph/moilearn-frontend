@@ -73,3 +73,16 @@ export const filterNotes = async (filters) => {
     throw err;
   }
 };
+// Get user's own uploads
+export const getMyUploads = async (token) => {
+  try {
+    const res = await fetch(`${API_URL}/my-uploads`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (!res.ok) throw new Error("Failed to fetch my uploads");
+    return await res.json();
+  } catch (err) {
+    throw err;
+  }
+};
+

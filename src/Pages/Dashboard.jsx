@@ -99,8 +99,8 @@ const Dashboard = () => {
       className: "feature-card upload-card"
     },
     {
-      title: "My Notes",
-      path: "/my-notes",
+      title: "My Uploads",
+      path: "/my-uploads",
       icon: FileText,
       description: "View and manage your notes",
       className: "feature-card my-notes-card"

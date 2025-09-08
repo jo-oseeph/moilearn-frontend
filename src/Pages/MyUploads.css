@@ -1,0 +1,62 @@
+.uploads-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.upload-card {
+  border: 1px solid #ddd;
+  border-top: 4px solid #007bff; /* bluish top border */
+  padding: 15px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.upload-card:hover {
+  transform: translateY(-4px);
+}
+
+.upload-title {
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+  color: #0b2153;
+}
+
+.upload-date {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-badge.pending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-badge.approved {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-badge.rejected {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.loading, .no-uploads {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 1rem;
+  color: #555;
+}

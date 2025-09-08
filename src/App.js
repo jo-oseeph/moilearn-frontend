@@ -12,6 +12,7 @@ import Dashboard from './Pages/Dashboard';
 import AdminDashboard from './Pages/AdminDashboard'; // Added import
 import Forbidden from './Pages/ForbiddenPage';
 import UploadNotePage from './Pages/UploadNotePage.jsx';
+import MyUploads from './Pages/MyUploads.jsx';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/forbidden" element={<Forbidden />} />
             <Route path="/upload" element={<UploadNotePage />} />
+            <Route path="/my-uploads" element={<MyUploads />} />
 
               {/* Protected routes */}
              <Route 
