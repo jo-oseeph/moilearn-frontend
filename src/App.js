@@ -1,60 +1,109 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
-import Navbar from './components/Navbar';
-import ProtectedRoute from './components/ProtectedRoute';
+// App.js
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import Navbar from "./components/Navbar";
+import ProtectedRoute from "./components/ProtectedRoute";
 
-// Import your page components
-import { HomePage } from './Pages/HomePage';
-import Login from './Pages/Login';
-import Register from './Pages/Register';
-import Dashboard from './Pages/Dashboard';
-import AdminDashboard from './Pages/AdminDashboard'; // Added import
-import Forbidden from './Pages/ForbiddenPage';
-import UploadNotePage from './Pages/UploadNotePage.jsx';
-import MyUploads from './Pages/MyUploads.jsx';
+// Public pages
+import { HomePage } from "./Pages/HomePage";
+import Login from "./Pages/Login";
+import Register from "./Pages/Register";
+import Forbidden from "./Pages/ForbiddenPage";
+
+// User pages
+import Dashboard from "./Pages/Dashboard";
+import UploadNotePage from "./Pages/UploadNotePage";
+import MyUploads from "./Pages/MyUploads";
+
+// Admin pages + layout
+import AdminLayout from "./layouts/AdminLayout";
+import AdminDashboard from "./Pages/Admin/AdminDashboard";
+import ManageNotes from "./Pages/Admin/ManageNotes";
+
+// Wrapper to conditionally show Navbar
+function LayoutWrapper({ children }) {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith("/admin");
+  return (
+    <>
+      {!isAdminRoute && <Navbar />}
+      {children}
+    </>
+  );
+}
 
 function App() {
   return (
     <Router>
       <AuthProvider>
         <div className="App">
-          <Navbar />
-          <main className="main-content">
-            <Routes>
-              {/* Public routes */}
-              <Route path="/" element={<HomePage />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/forbidden" element={<Forbidden />} />
-            <Route path="/upload" element={<UploadNotePage />} />
-            <Route path="/my-uploads" element={<MyUploads />} />
+          <LayoutWrapper>
+            <main className="main-content">
+              <Routes>
+                {/* --- Public routes --- */}
+                <Route path="/" element={<HomePage />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/forbidden" element={<Forbidden />} />
 
-              {/* Protected routes */}
-             <Route 
-  path="/dashboard" 
-  element={
-    <ProtectedRoute requiredRole="user">
-      <Dashboard />
-    </ProtectedRoute>
-  } 
-/>
-              <Route 
-                path="/admin/dashboard" 
-                element={
-                  <ProtectedRoute requiredRole="admin">
-                    <AdminDashboard />
-                  </ProtectedRoute>
-                } 
-              />
+                {/* --- User routes (protected) --- */}
+                <Route
+                  path="/dashboard"
+                  element={
+                    <ProtectedRoute requiredRole="user">
+                      <Dashboard />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/upload"
+                  element={
+                    <ProtectedRoute requiredRole="user">
+                      <UploadNotePage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/my-uploads"
+                  element={
+                    <ProtectedRoute requiredRole="user">
+                      <MyUploads />
+                    </ProtectedRoute>
+                  }
+                />
 
-              {/* Catch all route - 404 page */}
-              <Route path="*" element={<div>Page not found</div>} />
-            </Routes>
-          </main>
+                {/* --- Admin routes (protected, with layout) --- */}
+                <Route
+                  path="/admin/dashboard"
+                  element={
+                    <ProtectedRoute requiredRole="admin">
+                      <AdminLayout>
+                        <AdminDashboard />
+                      </AdminLayout>
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/admin/manage-notes"
+                  element={
+                    <ProtectedRoute requiredRole="admin">
+                      <AdminLayout>
+                        <ManageNotes />
+                      </AdminLayout>
+                    </ProtectedRoute>
+                  }
+                />
+
+                {/* --- Catch all (404) --- */}
+                <Route path="*" element={<div>Page not found</div>} />
+              </Routes>
+            </main>
+          </LayoutWrapper>
         </div>
       </AuthProvider>
     </Router>
   );
 }
+
 export default App;

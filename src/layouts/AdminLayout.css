@@ -1,0 +1,21 @@
+/* layouts/AdminLayout.css */
+.admin-layout {
+  display: flex;
+}
+
+.admin-main {
+  flex: 1;
+  margin-left: 0;
+  transition: margin-left 0.3s ease;
+}
+
+.admin-content {
+  padding: 20px;
+}
+
+/* Desktop: show sidebar */
+@media (min-width: 768px) {
+  .admin-main {
+    margin-left: 240px;
+  }
+}

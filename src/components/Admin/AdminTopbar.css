@@ -1,0 +1,21 @@
+/* Topbar.css */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1dd1a1; /* green */
+  padding: 10px 20px;
+  color: white;
+}
+
+/* Hamburger hidden on large screens */
+.hamburger {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .hamburger {
+    display: none;
+  }
+}
