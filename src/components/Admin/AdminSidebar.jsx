@@ -1,19 +1,28 @@
 // components/Admin/Sidebar.jsx
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { LayoutDashboard, FileText } from "lucide-react"; // icons
 import "./AdminSidebar.css";
 
 function Sidebar({ isOpen }) {
+  const location = useLocation();
+
   return (
     <aside className={`sidebar ${isOpen ? "open" : ""}`}>
       <h2 className="sidebar-title">Admin</h2>
       <nav>
         <ul>
-          <li>
-            <Link to="/admin/dashboard">Overview Dashboard</Link>
+          <li className={location.pathname === "/admin/dashboard" ? "active" : ""}>
+            <Link to="/admin/dashboard">
+              <LayoutDashboard size={20} />
+              <span className="link-text">Overview Dashboard</span>
+            </Link>
           </li>
-          <li>
-            <Link to="/admin/manage-notes">Manage Notes</Link>
+          <li className={location.pathname === "/admin/manage-notes" ? "active" : ""}>
+            <Link to="/admin/manage-notes">
+              <FileText size={20} />
+              <span className="link-text">Manage Notes</span>
+            </Link>
           </li>
         </ul>
       </nav>

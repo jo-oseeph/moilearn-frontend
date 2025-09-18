@@ -1,45 +1,26 @@
-/* Sidebar.css */
+/* Sidebar base */
 .sidebar {
   background-color: #0a3d62; /* dark blue */
   color: #fff;
   width: 220px;
   min-height: 100vh;
   padding: 20px;
-  transition: transform 0.3s ease-in-out;
-}
-
-/* Default: show sidebar on large screens */
-@media (min-width: 768px) {
-  .sidebar {
-    transform: translateX(0); /* always visible */
-    position: relative;
-  }
-}
-
-/* On small screens: hidden by default */
-@media (max-width: 767px) {
-  .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    transform: translateX(-100%); /* hide */
-    z-index: 1000;
-    height: 100%;
-  }
-  .sidebar.open {
-    transform: translateX(0); /* slide in */
-  }
+  transition: all 0.3s ease-in-out;
+  position: sticky;
+  top: 0;
 }
 
 .sidebar-title {
-  margin-bottom: 20px;
-  font-size: 20px;
+  margin-bottom: 25px;
+  font-size: 18px;
   font-weight: bold;
+  text-transform: uppercase;
 }
 
 .sidebar ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .sidebar ul li {
@@ -49,8 +30,39 @@
 .sidebar ul li a {
   color: #fff;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background 0.2s;
 }
 
-.sidebar ul li a:hover {
-  color: #1dd1a1; /* green hover */
+.sidebar ul li a:hover,
+.sidebar ul li.active a {
+  background-color: #1dd1a1; /* green hover */
+  color: #fff;
+}
+
+.link-text {
+  white-space: nowrap;
+}
+
+/* Mobile: collapsed */
+@media (max-width: 767px) {
+  .sidebar {
+    width: 70px;
+    padding: 15px 10px;
+  }
+  .sidebar-title {
+    display: none;
+  }
+  .link-text {
+    display: none; /* hide text, show only icons */
+  }
+  .sidebar ul li a {
+    justify-content: center;
+    gap: 0;
+  }
 }
