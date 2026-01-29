@@ -20,6 +20,8 @@ import MyUploads from "./Pages/MyUploads";
 import AdminLayout from "./layouts/AdminLayout";
 import AdminDashboard from "./Pages/Admin/AdminDashboard";
 import ManageNotes from "./Pages/Admin/ManageNotes";
+import NotesPage from "./Pages/NotesPage";
+
 
 // Wrapper to conditionally show Navbar
 function LayoutWrapper({ children }) {
@@ -46,6 +48,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/forbidden" element={<Forbidden />} />
+                <Route path="/notes" element={<NotesPage />} />
 
                 {/* --- User routes (protected) --- */}
                 <Route
