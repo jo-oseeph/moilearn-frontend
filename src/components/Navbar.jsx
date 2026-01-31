@@ -93,6 +93,10 @@ const Navbar = () => {
           <Link to="/" onClick={handleLinkClick}>
             Home
           </Link>
+          <Link to="/notes" onClick={handleLinkClick}>
+          Past Papers
+         </Link>
+         
           <Link to="/dashboard" onClick={handleLinkClick}>
             Dashboard
           </Link>
