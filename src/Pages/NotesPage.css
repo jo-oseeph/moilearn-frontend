@@ -1,0 +1,106 @@
+.notes-page {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.notes-title {
+  margin-bottom: 1.5rem;
+}
+
+.notes-filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.notes-filters input,
+.notes-filters select {
+  padding: 0.6rem;
+  font-size: 0.95rem;
+  width: 100%;
+}
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+}
+
+.note-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  padding: 1rem;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.note-card h3 {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.course-code {
+  font-weight: bold;
+  color: #2563eb;
+}
+
+.meta {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin: 0.5rem 0 1rem;
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.card-actions button {
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border-radius: 4px;
+  border: none;
+}
+
+.view-btn {
+  background: #f3f4f6;
+}
+
+.download-btn {
+  background: #2563eb;
+  color: #fff;
+}
+
+.no-results,
+.notes-loading {
+  text-align: center;
+  color: #6b7280;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .notes-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .notes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .notes-filters {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .notes-grid {
+    grid-template-columns: 1fr;
+  }
+}

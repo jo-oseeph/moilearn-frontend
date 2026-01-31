@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-// import "./NotesPage.css";
+ import "./NotesPage.css";
 
 const NotesPage = () => {
   const [notes, setNotes] = useState([]);
