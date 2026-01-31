@@ -46,15 +46,12 @@ const NotesPage = () => {
     });
   }, [notes, search, category]);
 
-  const handleDownload = async (id) => {
-    try {
-      const res = await fetch(`/api/notes/${id}/download`);
-      const data = await res.json();
-      window.open(data.fileUrl, "_blank");
-    } catch (err) {
-      console.error("Download failed", err);
-    }
-  };
+ const handleDownload = (id) => {
+  window.location.href = `http://localhost:5000/api/notes/${id}/download`;
+};
+
+
+
 
   if (loading) {
     return <div className="notes-loading">Loading notes…</div>;
