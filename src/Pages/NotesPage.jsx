@@ -1,11 +1,11 @@
 import React, { useEffect, useMemo, useState } from "react";
- import "./NotesPage.css";
+import { FiDownload, FiFileText, FiCloud } from "react-icons/fi";
+import "./NotesPage.css";
 
 const NotesPage = () => {
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // filters
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
 
@@ -25,11 +25,6 @@ const NotesPage = () => {
     fetchNotes();
   }, []);
 
-  /**
-   * Filter logic
-   * - Search matches courseCode, courseTitle, school
-   * - Category filters note / past_paper
-   */
   const filteredNotes = useMemo(() => {
     return notes.filter((note) => {
       const query = search.toLowerCase();
@@ -46,12 +41,9 @@ const NotesPage = () => {
     });
   }, [notes, search, category]);
 
- const handleDownload = (id) => {
-  window.location.href = `http://localhost:5000/api/notes/${id}/download`;
-};
-
-
-
+  const handleDownload = (id) => {
+    window.location.href = `http://localhost:5000/api/notes/${id}/download`;
+  };
 
   if (loading) {
     return <div className="notes-loading">Loading notes…</div>;
@@ -61,7 +53,6 @@ const NotesPage = () => {
     <div className="notes-page">
       <h1 className="notes-title">Available Notes</h1>
 
-      {/* Filters */}
       <div className="notes-filters">
         <input
           type="text"
@@ -77,13 +68,16 @@ const NotesPage = () => {
         </select>
       </div>
 
-      {/* Cards */}
       {filteredNotes.length === 0 ? (
         <p className="no-results">No notes found.</p>
       ) : (
         <div className="notes-grid">
           {filteredNotes.map((note) => (
             <div className="note-card" key={note._id}>
+              <div className="file-icon">
+                <FiFileText />
+              </div>
+
               <h3>{note.courseTitle}</h3>
               <p className="course-code">{note.courseCode}</p>
 
@@ -92,19 +86,21 @@ const NotesPage = () => {
               </p>
 
               <div className="card-actions">
-                <button
-                  className="view-btn"
-                  onClick={() => window.open(note.fileUrl, "_blank")}
-                >
-                  View
-                </button>
-
+                {/* Download button (left) */}
                 <button
                   className="download-btn"
                   onClick={() => handleDownload(note._id)}
                 >
-                  Download ({note.downloadsCount})
+                 
+                  <span>Download</span>
+                   <FiDownload />
                 </button>
+
+                {/* Download count (right) */}
+                <div className="download-count">
+                  <FiCloud />
+                  <span>{note.downloadsCount}</span>
+                </div>
               </div>
             </div>
           ))}
