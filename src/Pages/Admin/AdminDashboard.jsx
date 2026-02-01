@@ -57,7 +57,7 @@ const AdminDashboard = () => {
       bg: "card-blue",
     },
     {
-      title: "Total Notes",
+      title: "Total Past Papers",
       value: stats?.totalNotes || 0,
       icon: <FileText size={28} color="#059669" />,
       bg: "card-green",

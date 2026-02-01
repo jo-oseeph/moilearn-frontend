@@ -4,7 +4,8 @@ import {
   approveNote,
   rejectNote,
 } from "../../services/adminNotesService.js";
-// import "./ManageNotes.css";
+import "./ManageNotes.css";
+import { FaEye } from "react-icons/fa";
 
 const ManageNotes = () => {
   const [notes, setNotes] = useState([]);
@@ -65,54 +66,68 @@ const ManageNotes = () => {
     <div className="manage-notes">
       <h2>Pending Notes Review</h2>
 
-      {notes.map((note) => (
-        <div className="note-card" key={note._id}>
-          <div className="note-info">
-            <h3>
-              {note.courseTitle} ({note.courseCode})
-            </h3>
-            <p>
-              {note.school} • Year {note.year} • Sem {note.semester}
-            </p>
-            <p>
-              Uploaded by: <strong>{note.uploadedBy?.email}</strong>
-            </p>
-            <a href={note.fileUrl} target="_blank" rel="noreferrer">
-              View File
-            </a>
-          </div>
+      <div className="notes-grid">
+        {notes.map((note) => (
+          <div className="note-card" key={note._id}>
+            <div className="note-info">
+              <h3>
+                {note.courseTitle} ({note.courseCode})
+              </h3>
 
-          <div className="note-actions">
-            <button
-              className="approve"
-              disabled={actionLoading === note._id}
-              onClick={() => handleApprove(note._id)}
-            >
-              Approve
-            </button>
-            <button
-              className="reject"
-              disabled={actionLoading === note._id}
-              onClick={() => setRejecting(note._id)}
-            >
-              Reject
-            </button>
+              <p>
+                {note.school} • Year {note.year} • Sem {note.semester}
+              </p>
+
+              <a
+                href={note.fileUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="view-icon"
+                title="View file"
+              >
+                <FaEye />
+              </a>
+            </div>
+
+            <div className="note-actions">
+              <button
+                className="btn approve"
+                disabled={actionLoading === note._id}
+                onClick={() => handleApprove(note._id)}
+              >
+                Approve
+              </button>
+
+              <button
+                className="btn reject"
+                disabled={actionLoading === note._id}
+                onClick={() => setRejecting(note._id)}
+              >
+                Reject
+              </button>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
 
       {rejecting && (
         <div className="modal">
           <div className="modal-content">
             <h3>Reject Note</h3>
+
             <textarea
               placeholder="Reason for rejection"
               value={reason}
               onChange={(e) => setReason(e.target.value)}
             />
+
             <div className="modal-actions">
-              <button onClick={handleReject}>Confirm Reject</button>
-              <button onClick={() => setRejecting(null)}>Cancel</button>
+              <button className="btn approve" onClick={handleReject}>
+                Confirm Reject
+              </button>
+              <button className="btn reject" onClick={() => setRejecting(null)}>
+                Cancel
+              </button>
             </div>
           </div>
         </div>
