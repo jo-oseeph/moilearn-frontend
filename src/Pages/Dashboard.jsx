@@ -5,7 +5,6 @@ import {
   FileText, 
   Search, 
   User, 
-  LogOut
 } from 'lucide-react';
 import './Dashboard.css';
 
@@ -68,25 +67,7 @@ const Dashboard = () => {
     fetchDashboardData();
   }, []);
 
-  const handleLogout = async () => {
-    try {
-      await fetch('/api/auth/logout', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
-          'Content-Type': 'application/json'
-        }
-      });
-      
-      localStorage.removeItem('token');
-      window.location.href = '/login';
-    } catch (err) {
-      console.error('Logout error:', err);
-      // Force logout even if API call fails
-      localStorage.removeItem('token');
-      window.location.href = '/login';
-    }
-  };
+  
 
   const features = [
     {
@@ -205,14 +186,6 @@ const Dashboard = () => {
               </Link>
             );
           })}
-        </div>
-
-        {/* Logout Section */}
-        <div className="logout-section">
-          <button onClick={handleLogout} className="logout-btn">
-            <LogOut size={20} />
-            <span>Logout</span>
-          </button>
         </div>
       </div>
     </div>
