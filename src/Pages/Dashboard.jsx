@@ -5,8 +5,6 @@ import {
   FileText, 
   Search, 
   User, 
-  Bell, 
-  Settings, 
   LogOut
 } from 'lucide-react';
 import './Dashboard.css';
@@ -107,7 +105,7 @@ const Dashboard = () => {
     },
     {
       title: "Browse Notes",
-      path: "/browse",
+      path: "/notes",
       icon: Search,
       description: "Discover notes from others",
       className: "feature-card browse-card"
@@ -119,20 +117,20 @@ const Dashboard = () => {
       description: "Manage your account",
       className: "feature-card profile-card"
     },
-    {
-      title: "Notifications",
-      path: "/notifications",
-      icon: Bell,
-      description: "View your notifications",
-      className: "feature-card notifications-card"
-    },
-    {
-      title: "Settings",
-      path: "/settings",
-      icon: Settings,
-      description: "Configure your preferences",
-      className: "feature-card settings-card"
-    }
+    // {
+    //   title: "Notifications",
+    //   path: "/notifications",
+    //   icon: Bell,
+    //   description: "View your notifications",
+    //   className: "feature-card notifications-card"
+    // },
+    // {
+    //   title: "Settings",
+    //   path: "/settings",
+    //   icon: Settings,
+    //   description: "Configure your preferences",
+    //   className: "feature-card settings-card"
+    // }
   ];
 
   if (loading) {
@@ -182,11 +180,7 @@ const Dashboard = () => {
     </div>
     <div className="stat-item downloaded">
       <div className="stat-number">{stats.notesDownloaded}</div>
-      <div className="stat-label">Downloaded</div>
-    </div>
-    <div className="stat-item bookmarked">
-      <div className="stat-number">{stats.notesBookmarked}</div>
-      <div className="stat-label">Bookmarked</div>
+      <div className="stat-label">Downloads</div>
     </div>
   </div>
 </div>
