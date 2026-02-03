@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Download, FileText, GraduationCap, ArrowRight, TrendingUp } from 'lucide-react';
+import { Download, FileText, GraduationCap, TrendingUp } from 'lucide-react';
 import './stats.css';
 
 const StatsSection = () => {
@@ -16,9 +16,9 @@ const StatsSection = () => {
       try {
         setTimeout(() => {
           setStats({
-            notesCount: 1247,
-            pastPapersCount: 583,
-            facultiesCount: 12
+            notesCount: 16,
+            pastPapersCount: 8,
+            facultiesCount: 7,
           });
           setIsLoading(false);
         }, 1000);
@@ -34,18 +34,6 @@ const StatsSection = () => {
   const animateCount = (targetCount) => {
     if (isLoading) return 0;
     return targetCount;
-  };
-
-  const handleDownloadsClick = () => {
-    window.location.href = '/downloads';
-  };
-
-  const handlePastPapersClick = () => {
-    window.location.href = '/past-papers';
-  };
-
-  const handleFacultiesClick = () => {
-    window.location.href = '/faculties';
   };
 
   return (
@@ -79,12 +67,12 @@ const StatsSection = () => {
               <p className="card-description">
                 Number of times academic materials have been accessed by students
               </p>
-              <button className="card-button" onClick={handleDownloadsClick}>
+              {/* <button className="card-button" onClick={handleDownloadsClick}>
                 <span>View Downloads</span>
                 <ArrowRight size={16} />
-              </button>
+              </button> */}
             </div>
-            <div className="card-trend">
+             <div className="card-trend">
               <TrendingUp size={14} />
               <span>+15% this month</span>
             </div>
@@ -110,10 +98,10 @@ const StatsSection = () => {
               <p className="card-description">
                 Curated collection of past examination papers across courses
               </p>
-              <button className="card-button" onClick={handlePastPapersClick}>
+              {/* <button className="card-button" onClick={handlePastPapersClick}>
                 <span>Browse Past Papers</span>
                 <ArrowRight size={16} />
-              </button>
+              </button> */}
             </div>
             <div className="card-trend">
               <TrendingUp size={14} />
@@ -141,10 +129,10 @@ const StatsSection = () => {
               <p className="card-description">
                 Academic faculties currently supported on the platform
               </p>
-              <button className="card-button" onClick={handleFacultiesClick}>
+              {/* <button className="card-button" onClick={handleFacultiesClick}>
                 <span>Explore Faculties</span>
                 <ArrowRight size={16} />
-              </button>
+              </button> */}
             </div>
             <div className="card-trend">
               <TrendingUp size={14} />
