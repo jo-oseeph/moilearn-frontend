@@ -101,7 +101,7 @@ const StatsSection = () => {
               {/* <button className="card-button" onClick={handlePastPapersClick}>
                 <span>Browse Past Papers</span>
                 <ArrowRight size={16} />
-              </button> */}
+              </button> */} 
             </div>
             <div className="card-trend">
               <TrendingUp size={14} />

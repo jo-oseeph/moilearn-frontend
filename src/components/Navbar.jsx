@@ -5,7 +5,7 @@ import { User, LogIn, UserPlus, Menu, X } from "lucide-react";
 import "./Navbar.css";
 
 const Navbar = () => {
-  const { isLoggedIn, user, logout } = useAuth();
+ const { isLoggedIn, user, role, logout } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -97,9 +97,9 @@ const Navbar = () => {
           Past Papers
          </Link>
          
-          <Link to="/dashboard" onClick={handleLinkClick}>
+          {/* <Link to="/dashboard" onClick={handleLinkClick}>
             Dashboard
-          </Link>
+          </Link> */}
           
           {!isLoggedIn ? (
             <div className="auth-buttons">
@@ -126,12 +126,13 @@ const Navbar = () => {
               </button>
               {dropdownOpen && (
                 <div className="dropdown">
-                  <Link 
-                    to="/dashboard" 
-                    onClick={handleLinkClick}
-                  >
-                    My Dashboard
-                  </Link>
+                <Link
+  to={role === "admin" ? "/admin/dashboard" : "/dashboard"}
+  onClick={handleLinkClick}
+>
+  My Dashboard
+</Link>
+
                   <Link 
                     to="/settings" 
                     onClick={handleLinkClick}
