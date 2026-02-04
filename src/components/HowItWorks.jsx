@@ -1,4 +1,5 @@
 import React from "react";
+import { UserPlus, Upload, Download } from "lucide-react";
 import "./HowItWorks.css";
 
 const HowItWorks = () => {
@@ -6,20 +7,23 @@ const HowItWorks = () => {
     {
       id: 1,
       title: "Create an Account",
-      description: "Sign up for free and set up your profile in minutes.",
-      icon: "👤",
+      description:
+        "Sign up in seconds to access verified past papers and academic resources.",
+      icon: <UserPlus size={32} />,
     },
     {
       id: 2,
-      title: "Upload Notes & Papers",
-      description: "Share your study materials for others to access.",
-      icon: "📄",
+      title: "Browse Past Papers",
+      description:
+        "Explore past exam papers organized by faculty, course, and year.",
+      icon: <Upload size={32} />,
     },
     {
       id: 3,
-      title: "Download & Learn",
-      description: "Browse and download notes to improve your studies.",
-      icon: "⬇️",
+      title: "Download & Prepare",
+      description:
+        "Download papers instantly and prepare confidently for your exams.",
+      icon: <Download size={32} />,
     },
   ];
 
@@ -27,12 +31,16 @@ const HowItWorks = () => {
     <section className="how-it-works">
       <div className="container">
         <h2 className="section-title">How It Works</h2>
-        <div className="steps">
+        <p className="section-subtitle">
+          Get started in three simple steps and access past papers with ease
+        </p>
+
+        <div className="steps-grid">
           {steps.map((step) => (
             <div key={step.id} className="step-card">
               <div className="step-icon">{step.icon}</div>
-              <h3>{step.title}</h3>
-              <p>{step.description}</p>
+              <h3 className="step-title">{step.title}</h3>
+              <p className="step-description">{step.description}</p>
             </div>
           ))}
         </div>

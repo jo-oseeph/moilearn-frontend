@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, Upload, Users, ArrowRight } from 'lucide-react';
+import {  Upload, Users, ArrowRight } from 'lucide-react';
 import './Hero.css';
 
 const Hero = () => {
@@ -54,7 +54,6 @@ const Hero = () => {
                 className="btn btn-primary"
                 onClick={handleBrowseNotes}
               >
-                <BookOpen size={18} />
                 Browse Notes
                 <ArrowRight size={16} />
               </button>
@@ -63,8 +62,9 @@ const Hero = () => {
                 className="btn btn-secondary"
                 onClick={handleUploadClick}
               >
-                <Upload size={18} />
+              
                 Upload Materials
+               <Upload size={18} />
               </button>
             </div>
             

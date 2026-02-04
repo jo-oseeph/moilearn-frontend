@@ -1,7 +1,7 @@
 import React from 'react' 
 import Hero from '../components/Hero' 
-import LatestUploads from '../components/LatestUploads'
-// import HowItWorks from '../components/HowItWorks'
+// import LatestUploads from '../components/LatestUploads'
+import HowItWorks from '../components/HowItWorks'
 // import FeaturesSection from '../components/FeaturesSection'
 import StatsSection from '../components/StatsSection' 
 import CTASection from '../components/CTASection'
@@ -14,8 +14,8 @@ export const HomePage = () => {
     <div>                                                                                                                               
         <Hero/>
         <StatsSection/>
-        {/* <HowItWorks/>  */}
-        <LatestUploads/>
+        <HowItWorks/> 
+        {/* <LatestUploads/> */}
         {/* <FeaturesSection/>  */}
         <CTASection/>
         <Footer/>

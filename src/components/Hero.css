@@ -2,9 +2,7 @@
           position: relative;
           min-height: 600px;
        
-          /* background-image: 
-           
-            url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'); */
+      /* Background image */
           background-size: cover;
           background-image: url('../assets/moibg.jpg');
           background-position: center;
@@ -114,13 +112,14 @@
           justify-content: center;
           margin-bottom: 32px;
           animation: fadeInUp 0.6s ease-out 0.8s both;
+          
         }
 
         .btn {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          padding: 14px 28px;
+          padding: 14px 15px;
           border-radius: 8px;
           font-weight: 600;
           font-size: 16px;
@@ -151,23 +150,26 @@
         .btn:hover::before {
           left: 100%;
         }
-
+ 
         .btn-primary {
           background: white;
-          color: #007bff;
+          color: #007bff !important;
           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .btn-primary:hover {
           transform: translateY(-2px);
           box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
-          background: #f8f9fa;
-        }
+          background: transparent !important;
+          border: 2px solid rgba(255, 255, 255, 0.8) !important;
+          backdrop-filter: blur(10px);
+          color: white !important;
+        } 
 
         .btn-secondary {
-          background: transparent;
+          background: transparent !important;
           color: white;
-          border: 2px solid rgba(255, 255, 255, 0.8);
+          border: 2px solid rgba(255, 255, 255, 0.8) !important;
           backdrop-filter: blur(10px);
         }
 
@@ -175,7 +177,7 @@
           background: rgba(255, 255, 255, 0.1);
           border-color: white;
           transform: translateY(-2px);
-        }
+        } 
 
         .hero-trust {
           animation: fadeInUp 0.6s ease-out 1s both;
