@@ -157,7 +157,7 @@ const Dashboard = () => {
   <div className="stats-grid centered-stats">
     <div className="stat-item uploaded">
       <div className="stat-number">{stats.notesUploaded}</div>
-      <div className="stat-label">Uploaded</div>
+      <div className="stat-label">My Uploads</div>
     </div>
     <div className="stat-item downloaded">
       <div className="stat-number">{stats.notesDownloaded}</div>
