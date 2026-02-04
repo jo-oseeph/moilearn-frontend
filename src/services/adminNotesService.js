@@ -45,3 +45,33 @@ export const rejectNote = async (noteId, reason) => {
 
   return res.json();
 };
+
+export const deleteNote = async (id) => {
+  const token = localStorage.getItem("moilearn_token");
+
+  const res = await fetch(`/api/admin/notes/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!res.ok) {
+    const err = await res.json();
+    throw new Error(err.message || "Delete failed");
+  }
+
+  return res.json();
+};
+
+export const fetchNotesByStatus = async (status = "pending") => {
+  const token = localStorage.getItem("moilearn_token");
+  const res = await fetch(`/api/admin/notes?status=${status}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (!res.ok) throw new Error("Failed to fetch notes");
+  return res.json();
+};

@@ -114,3 +114,58 @@
   display: flex;
   gap: 10px;
 }
+
+/* ManageNotes.css */
+
+/* ManageNotes.css */
+
+/* Container for action buttons */
+.note-actions {
+  display: flex;
+  justify-content: space-between; /* left & right alignment */
+  align-items: center;
+  margin-top: 10px; /* optional spacing from note info */
+}
+
+/* Delete button */
+.btn.delete-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  background-color: #16a34a; /* green background */
+  color: #fff; /* white icon */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn.delete-icon:hover {
+  background-color: #138f3c; /* darker green on hover */
+}
+
+/* View button */
+.view-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  background-color: #16a34a; /* green background */
+  color: #fff; /* white icon */
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.view-icon:hover {
+  background-color: #138f3c; /* darker green on hover */
+}
+
+.view-icon svg,
+.btn.delete-icon svg {
+  width: 18px;
+  height: 18px;
+}
