@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { User, LogIn, UserPlus, Menu, X } from "lucide-react";
 import "./Navbar.css";
@@ -90,16 +90,28 @@ const Navbar = () => {
 
         {/* Navigation Links */}
         <div className={`navbar-links ${menuOpen ? 'mobile-open' : ''}`}>
-          <Link to="/" onClick={handleLinkClick}>
+          <NavLink 
+            to="/" 
+            onClick={handleLinkClick}
+            className={({ isActive }) => isActive ? "active" : ""}
+          >
             Home
-          </Link>
-          <Link to="/notes" onClick={handleLinkClick}>
-          Past Papers
-         </Link>
+          </NavLink>
+          <NavLink 
+            to="/notes" 
+            onClick={handleLinkClick}
+            className={({ isActive }) => isActive ? "active" : ""}
+          >
+            Past Papers
+          </NavLink>
          
-          {/* <Link to="/dashboard" onClick={handleLinkClick}>
+          {/* <NavLink 
+            to="/dashboard" 
+            onClick={handleLinkClick}
+            className={({ isActive }) => isActive ? "active" : ""}
+          >
             Dashboard
-          </Link> */}
+          </NavLink> */}
           
           {!isLoggedIn ? (
             <div className="auth-buttons">

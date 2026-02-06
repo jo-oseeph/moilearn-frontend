@@ -52,6 +52,12 @@
   color: #1e40af;
 }
 
+.navbar-links > a.active {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
 .auth-buttons {
   display: flex;
   align-items: center;
@@ -194,7 +200,7 @@
 }
 
 .menu-toggle:hover {
-  background-color: #f1f5f9;
+  background-color: transparent;
 }
 
 /* Menu Overlay - Hidden on Desktop */
@@ -280,6 +286,12 @@
     color: #1d4ed8;
   }
 
+  .navbar-links > a.active {
+    color: #1d4ed8;
+    font-weight: 600;
+    background-color: transparent;
+  }
+
   .navbar-links > a:last-of-type {
     border-bottom: none;
   }
@@ -296,8 +308,9 @@
 
   .btn-login,
   .btn-register {
-    width: auto !important;
-    max-width: 180px !important;
+    width: 220px !important;
+    min-width: 220px !important;
+    max-width: 220px !important;
     justify-content: center;
     padding: 0.75rem 1.25rem !important;
     font-size: 1rem;
@@ -322,8 +335,9 @@
   }
 
   .profile-button {
-    width: auto !important;
-    max-width: 180px !important;
+    width: 220px !important;
+    min-width: 220px !important;
+    max-width: 220px !important;
     justify-content: center;
     padding: 0.75rem 1.25rem !important;
     font-size: 1rem;
@@ -342,7 +356,7 @@
     border: none;
     margin-top: 1rem;
     width: 100%;
-    max-width: 180px;
+    max-width: 220px;
     background-color: #f8fafc;
     border-radius: 0.5rem;
   }
@@ -409,20 +423,22 @@
 
   .btn-login,
   .btn-register {
-    width: auto !important;
-    max-width: 160px !important;
+    width: 200px !important;
+    min-width: 200px !important;
+    max-width: 200px !important;
     padding: 0.9rem 1.2rem !important;
     font-size: 1rem !important;
   }
 
   .profile-button {
-    width: auto !important;
-    max-width: 160px !important;
+    width: 200px !important;
+    min-width: 200px !important;
+    max-width: 200px !important;
     padding: 0.9rem 1.2rem !important;
     font-size: 1rem !important;
   }
 
   .dropdown {
-    max-width: 160px;
+    max-width: 200px;
   }
 }
