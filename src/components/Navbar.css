@@ -5,14 +5,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1rem;
+  padding: 0.75rem 1rem;
   background-color: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
   z-index: 1000;
-  min-height: 40px;
-  
-  
+  min-height: 50px;
 }
 
 .navbar-brand {
@@ -74,7 +72,7 @@
 }
 
 .btn-login:hover {
-  background-color: #1e40af !important;
+  background-color: #16a34a !important;
   color: white !important;
 }
 
@@ -93,8 +91,9 @@
 }
 
 .btn-register:hover {
-  background-color: #1d4ed8 !important;
+  background-color: #16a34a !important;
   color: white !important;
+  border-color: #16a34a !important;
 }
 
 .profile-menu {
@@ -116,13 +115,14 @@
 }
 
 .profile-button:hover {
-  background-color: #1d4ed8;
-  color: white;
+  background-color: #16a34a !important;
+  color: white !important;
+  border-color: #16a34a !important;
 }
 
 .profile-button:hover .user-avatar {
-  background-color: white;
-  color: #1d4ed8;
+  background-color: white !important;
+  color: #16a34a !important;
 }
 
 .user-avatar {
@@ -191,8 +191,6 @@
   justify-content: center;
   flex-shrink: 0;
   margin: 0;
-  vertical-align: top;
-  align-self: flex-start;
 }
 
 .menu-toggle:hover {
@@ -207,15 +205,16 @@
 /* Mobile Styles */
 @media (max-width: 768px) {
   .navbar {
-    padding: 1rem;
+    padding: 0.75rem 1rem;
     flex-wrap: nowrap;
-    /* align-items: flex-start; */
-    min-height: 60px;
+    align-items: center;
+    min-height: 55px;
     position: relative;
   }
 
   .navbar-brand {
-    margin-top: 0.5rem;
+    font-size: 1.5rem;
+    margin: 0;
   }
 
   /* Show menu toggle on mobile */
@@ -224,9 +223,7 @@
     margin-left: auto;
     align-items: center;
     justify-content: center;
-    position: relative;
-    top: 0;
-    margin-top: 0.25rem;
+    margin: 0;
   }
 
   /* Mobile menu - slide in from right */
@@ -299,11 +296,21 @@
 
   .btn-login,
   .btn-register {
-    width: 100%;
+    width: auto !important;
+    max-width: 180px !important;
     justify-content: center;
-    padding: 0.75rem 1.5rem;
+    padding: 0.75rem 1.25rem !important;
     font-size: 1rem;
     border-radius: 0.5rem;
+  }
+
+  .btn-login:hover {
+    background-color: #16a34a !important;
+  }
+
+  .btn-register:hover {
+    background-color: #16a34a !important;
+    border-color: #16a34a !important;
   }
 
   /* Profile menu in mobile */
@@ -315,11 +322,17 @@
   }
 
   .profile-button {
-    width: 100%;
+    width: auto !important;
+    max-width: 180px !important;
     justify-content: center;
-    padding: 0.75rem 1.5rem;
+    padding: 0.75rem 1.25rem !important;
     font-size: 1rem;
     border-radius: 0.5rem;
+  }
+
+  .profile-button:hover {
+    background-color: #16a34a !important;
+    border-color: #16a34a !important;
   }
 
   /* Dropdown in mobile */
@@ -329,6 +342,7 @@
     border: none;
     margin-top: 1rem;
     width: 100%;
+    max-width: 180px;
     background-color: #f8fafc;
     border-radius: 0.5rem;
   }
@@ -380,7 +394,7 @@
   }
 
   .navbar-brand {
-    font-size: 1.25rem;
+    font-size: 1.35rem;
   }
 
   .navbar-links {
@@ -395,12 +409,20 @@
 
   .btn-login,
   .btn-register {
-    padding: 1rem 1.5rem;
-    font-size: 1.1rem;
+    width: auto !important;
+    max-width: 160px !important;
+    padding: 0.9rem 1.2rem !important;
+    font-size: 1rem !important;
   }
 
   .profile-button {
-    padding: 1rem 1.5rem;
-    font-size: 1.1rem;
+    width: auto !important;
+    max-width: 160px !important;
+    padding: 0.9rem 1.2rem !important;
+    font-size: 1rem !important;
+  }
+
+  .dropdown {
+    max-width: 160px;
   }
 }
