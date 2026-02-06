@@ -34,7 +34,7 @@ const MyUploads = () => {
     };
 
     fetchUploads();
-  }, [isLoggedIn]); // 👈 re-run when login/logout changes
+  }, [isLoggedIn]); 
 
   if (!isLoggedIn) {
     return <p className="no-access">You must be logged in to view your uploads.</p>;
