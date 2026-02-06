@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { FiDownload, FiFileText, FiCloud } from "react-icons/fi";
 import "./NotesPage.css";
-
+import API_BASE_URL from "../config/api"; 
 const NotesPage = () => {
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -12,7 +12,15 @@ const NotesPage = () => {
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const res = await fetch("/api/notes");
+        const res = await fetch(`${API_BASE_URL}/api/notes`, {
+          credentials: "include",
+        });
+
+        if (!res.ok) {
+          const text = await res.text();
+          throw new Error("Failed to fetch notes: " + text);
+        }
+
         const data = await res.json();
         setNotes(data);
       } catch (err) {
@@ -42,7 +50,8 @@ const NotesPage = () => {
   }, [notes, search, category]);
 
   const handleDownload = (id) => {
-    window.location.href = `http://localhost:5000/api/notes/${id}/download`;
+    // ✅ Must hit backend directly, not Vercel
+    window.location.href = `${API_BASE_URL}/api/notes/${id}/download`;
   };
 
   if (loading) {
@@ -61,7 +70,10 @@ const NotesPage = () => {
           onChange={(e) => setSearch(e.target.value)}
         />
 
-        <select value={category} onChange={(e) => setCategory(e.target.value)}>
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        >
           <option value="all">All Categories</option>
           <option value="note">Notes</option>
           <option value="past_paper">Past Papers</option>
@@ -86,17 +98,14 @@ const NotesPage = () => {
               </p>
 
               <div className="card-actions">
-                {/* Download button (left) */}
                 <button
                   className="download-btn"
                   onClick={() => handleDownload(note._id)}
                 >
-                 
                   <span>Download</span>
-                   <FiDownload />
+                  <FiDownload />
                 </button>
 
-                {/* Download count (right) */}
                 <div className="download-count">
                   <FiCloud />
                   <span>{note.downloadsCount}</span>

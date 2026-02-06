@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Register.css';
+import API_BASE_URL from "../config/api.js";
 
 const Register = () => {
   // State management for form inputs
@@ -44,7 +45,7 @@ const Register = () => {
 
     try {
       // Send POST request to backend
-      const response = await fetch('http://localhost:5000/api/auth/register', {
+      const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

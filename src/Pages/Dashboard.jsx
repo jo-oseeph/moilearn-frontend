@@ -1,64 +1,76 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { 
-  Upload, 
-  FileText, 
-  Search, 
-  User, 
-} from 'lucide-react';
-import './Dashboard.css';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import {
+  Upload,
+  FileText,
+  Search,
+  User,
+} from "lucide-react";
+import "./Dashboard.css";
+import API_BASE_URL from "../config/api"; 
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
   const [stats, setStats] = useState({
     notesUploaded: 0,
     notesDownloaded: 0,
-    notesBookmarked: 0
+    notesBookmarked: 0,
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch user data and stats from backend
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
         setLoading(true);
-        
-        // Get user profile
-        const userResponse = await fetch('/api/user/profile', {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('moilearn_token')}`,
-            'Content-Type': 'application/json'
+
+        const token = localStorage.getItem("moilearn_token");
+        if (!token) throw new Error("No auth token found");
+
+        // -------- FETCH USER PROFILE --------
+        const userResponse = await fetch(
+          `${API_BASE_URL}/api/user/profile`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
           }
-        });
-        
+        );
+
         if (!userResponse.ok) {
-          throw new Error('Failed to fetch user data');
+          const text = await userResponse.text();
+          throw new Error("User fetch failed: " + text);
         }
-        
+
         const userData = await userResponse.json();
         setUser(userData);
 
-        // Get user stats
-        const statsResponse = await fetch('/api/user/stats', {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('moilearn_token')}`,
-            'Content-Type': 'application/json'
+        // -------- FETCH USER STATS --------
+        const statsResponse = await fetch(
+          `${API_BASE_URL}/api/user/stats`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
           }
-        });
-        
+        );
+
         if (!statsResponse.ok) {
-          throw new Error('Failed to fetch stats');
+          const text = await statsResponse.text();
+          throw new Error("Stats fetch failed: " + text);
         }
-        
+
         const statsData = await statsResponse.json();
         setStats(statsData);
-        
       } catch (err) {
+        console.error("Dashboard data fetch error:", err);
         setError(err.message);
-        console.error('Dashboard data fetch error:', err);
       } finally {
         setLoading(false);
       }
@@ -67,51 +79,35 @@ const Dashboard = () => {
     fetchDashboardData();
   }, []);
 
-  
-
   const features = [
     {
       title: "Upload Notes",
       path: "/upload",
       icon: Upload,
       description: "Share your notes with others",
-      className: "feature-card upload-card"
+      className: "feature-card upload-card",
     },
     {
       title: "My Uploads",
       path: "/my-uploads",
       icon: FileText,
       description: "View and manage your notes",
-      className: "feature-card my-notes-card"
+      className: "feature-card my-notes-card",
     },
     {
       title: "Browse Notes",
       path: "/notes",
       icon: Search,
       description: "Discover notes from others",
-      className: "feature-card browse-card"
+      className: "feature-card browse-card",
     },
     {
       title: "Profile",
       path: "/profile",
       icon: User,
       description: "Manage your account",
-      className: "feature-card profile-card"
+      className: "feature-card profile-card",
     },
-    // {
-    //   title: "Notifications",
-    //   path: "/notifications",
-    //   icon: Bell,
-    //   description: "View your notifications",
-    //   className: "feature-card notifications-card"
-    // },
-    // {
-    //   title: "Settings",
-    //   path: "/settings",
-    //   icon: Settings,
-    //   description: "Configure your preferences",
-    //   className: "feature-card settings-card"
-    // }
   ];
 
   if (loading) {
@@ -131,7 +127,10 @@ const Dashboard = () => {
         <div className="error-message">
           <h2>Unable to load dashboard</h2>
           <p>{error}</p>
-          <button onClick={() => window.location.reload()} className="retry-btn">
+          <button
+            onClick={() => window.location.reload()}
+            className="retry-btn"
+          >
             Try Again
           </button>
         </div>
@@ -142,31 +141,31 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <div className="dashboard-content">
-        {/* Header Section */}
-       <header className="dashboard-header">
-  <h1 className="welcome-title">
-    Welcome back, <span className="username-blue">{user?.username || 'User'} </span>
-  </h1>
-  <p className="welcome-subtitle">
-    Here's what's happening with your notes today.
-  </p>
-</header>
+        <header className="dashboard-header">
+          <h1 className="welcome-title">
+            Welcome back,{" "}
+            <span className="username-blue">
+              {user?.username || "User"}
+            </span>
+          </h1>
+          <p className="welcome-subtitle">
+            Here's what's happening with your notes today.
+          </p>
+        </header>
 
-      {/* User Info & Stats Section */}
-<div className="user-info-card">
-  <div className="stats-grid centered-stats">
-    <div className="stat-item uploaded">
-      <div className="stat-number">{stats.notesUploaded}</div>
-      <div className="stat-label">My Uploads</div>
-    </div>
-    <div className="stat-item downloaded">
-      <div className="stat-number">{stats.notesDownloaded}</div>
-      <div className="stat-label">Downloads</div>
-    </div>
-  </div>
-</div>
+        <div className="user-info-card">
+          <div className="stats-grid centered-stats">
+            <div className="stat-item uploaded">
+              <div className="stat-number">{stats.notesUploaded}</div>
+              <div className="stat-label">My Uploads</div>
+            </div>
+            <div className="stat-item downloaded">
+              <div className="stat-number">{stats.notesDownloaded}</div>
+              <div className="stat-label">Downloads</div>
+            </div>
+          </div>
+        </div>
 
-        {/* Features Grid */}
         <div className="features-grid">
           {features.map((feature) => {
             const IconComponent = feature.icon;
@@ -181,7 +180,9 @@ const Dashboard = () => {
                     <IconComponent size={32} />
                   </div>
                   <h3 className="feature-title">{feature.title}</h3>
-                  <p className="feature-description">{feature.description}</p>
+                  <p className="feature-description">
+                    {feature.description}
+                  </p>
                 </div>
               </Link>
             );
