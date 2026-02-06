@@ -203,7 +203,7 @@
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .hero {
-    height: 90vh;
+    height: 100vh;
     min-height: 600px;
     background-attachment: scroll;
   }
@@ -228,12 +228,12 @@
   }
 
   .hero-title {
-    font-size: 2.8rem !important;
-    margin-bottom: 28px !important;
+    font-size: 3rem !important;
+    margin-bottom: 32px !important;
   }
 
   .hero-description {
-    font-size: 1.15rem !important;
+    font-size: 1.5rem !important;
     margin-bottom: 40px;
     line-height: 1.7 !important;
   }
