@@ -9,6 +9,8 @@ import {
   XCircle,
 } from "lucide-react";
 import "./Dashboard.css";
+import API_BASE_URL from "../../config/api"; 
+
 
 const AdminDashboard = () => {
   const [stats, setStats] = useState(null);
@@ -24,12 +26,13 @@ const AdminDashboard = () => {
           throw new Error("No token found in localStorage");
         }
 
-        const res = await fetch("/api/admin/dashboard", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        });
+      const res = await fetch(`${API_BASE_URL}/api/admin/dashboard`, {
+  headers: {
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+  },
+});
+
 
         if (!res.ok) {
           throw new Error("Failed to fetch dashboard stats");

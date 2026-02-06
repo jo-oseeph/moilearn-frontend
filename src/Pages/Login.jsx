@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "./Login.css";
+import API_BASE_URL from "../config/api"; 
+
 
 const Login = () => {
   const { login, isLoggedIn, role } = useAuth();
@@ -37,11 +39,12 @@ const Login = () => {
 
     setIsLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+     const res = await fetch(`${API_BASE_URL}/api/auth/login`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(formData),
+});
+
 
       const data = await res.json();
       console.log("Login response:", data);
