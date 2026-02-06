@@ -1,9 +1,11 @@
-// services/notesService.js
-import AuthService from "../services/AuthService.js";
 
-const API_URL = "http://localhost:5000/api/notes"; // adjust if backend URL differs
+import API_BASE_URL from "../config/api.js";
+import AuthService from "./AuthService.js";
 
-// Upload a note or past paper
+// Base URL for notes API
+const API_URL = `${API_BASE_URL}/api/notes`;
+
+// Upload a note or past 
 export const uploadNote = async (formData, onProgress) => {
   try {
     const token = AuthService.getToken();
@@ -25,7 +27,11 @@ export const uploadNote = async (formData, onProgress) => {
 
       xhr.onload = () => {
         if (xhr.status >= 200 && xhr.status < 300) {
-          resolve(JSON.parse(xhr.responseText));
+          try {
+            resolve(JSON.parse(xhr.responseText));
+          } catch (err) {
+            reject({ message: "Failed to parse response JSON" });
+          }
         } else {
           reject({ message: xhr.responseText || "Upload failed" });
         }
@@ -43,7 +49,7 @@ export const uploadNote = async (formData, onProgress) => {
 // Get all notes (public)
 export const getAllNotes = async () => {
   try {
-    const res = await fetch(API_URL);
+    const res = await fetch(API_URL, { credentials: "include" });
     if (!res.ok) throw new Error("Failed to fetch notes");
     return await res.json();
   } catch (err) {
@@ -54,7 +60,7 @@ export const getAllNotes = async () => {
 // Search notes (public)
 export const searchNotes = async (query) => {
   try {
-    const res = await fetch(`${API_URL}/search?q=${encodeURIComponent(query)}`);
+    const res = await fetch(`${API_URL}/search?q=${encodeURIComponent(query)}`, { credentials: "include" });
     if (!res.ok) throw new Error("Search failed");
     return await res.json();
   } catch (err) {
@@ -62,22 +68,24 @@ export const searchNotes = async (query) => {
   }
 };
 
-// Filter notes (public)
+// Filter notes
 export const filterNotes = async (filters) => {
   try {
     const queryString = new URLSearchParams(filters).toString();
-    const res = await fetch(`${API_URL}/filter?${queryString}`);
+    const res = await fetch(`${API_URL}/filter?${queryString}`, { credentials: "include" });
     if (!res.ok) throw new Error("Filter request failed");
     return await res.json();
   } catch (err) {
     throw err;
   }
 };
+
 // Get user's own uploads
 export const getMyUploads = async (token) => {
   try {
     const res = await fetch(`${API_URL}/my-uploads`, {
       headers: { Authorization: `Bearer ${token}` },
+      credentials: "include",
     });
     if (!res.ok) throw new Error("Failed to fetch my uploads");
     return await res.json();
@@ -85,4 +93,3 @@ export const getMyUploads = async (token) => {
     throw err;
   }
 };
-
