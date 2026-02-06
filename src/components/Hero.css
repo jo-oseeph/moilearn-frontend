@@ -20,8 +20,8 @@
   right: 0;
   bottom: 0;
   background: linear-gradient(
-    135deg,
-    rgba(0, 0, 0, 0.5) 0%,
+    135deg, 
+    rgba(0, 0, 0, 0.5) 0%, 
     rgba(0, 0, 0, 0.85) 100%
   );
   z-index: 1;
@@ -63,7 +63,7 @@
 }
 
 .hero-title {
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: 3.5rem;
   font-weight: 700;
   color: white !important;
   line-height: 1.2;
@@ -77,7 +77,7 @@
 }
 
 .hero-description {
-  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-size: 1.25rem;
   color: rgba(255, 255, 255, 0.9) !important;
   line-height: 1.6;
   margin-bottom: 40px;
@@ -114,6 +114,54 @@
   white-space: nowrap;
 }
 
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn-primary {
+  background: white !important;
+  color: #007bff !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3) !important;
+  background: transparent !important;
+  border: 2px solid rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(10px);
+  color: white !important;
+}
+
+.btn-secondary {
+  background: transparent !important;
+  color: white !important;
+  border: 2px solid rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 2px solid white !important;
+  transform: translateY(-2px) !important;
+}
+
 /* Animations */
 @keyframes fadeInUp {
   from {
@@ -126,15 +174,33 @@
   }
 }
 
-/* Tablet */
+/* Tablet Responsive */
 @media (max-width: 992px) {
   .hero {
     height: 75vh;
     min-height: 500px;
   }
+
+  .hero-content {
+    max-width: 650px;
+  }
+
+  .hero-badge {
+    font-size: 13px;
+    padding: 8px 16px;
+  }
+
+  .hero-description {
+    margin-bottom: 32px;
+  }
+
+  .btn {
+    padding: 12px 24px !important;
+    font-size: 15px !important;
+  }
 }
 
-/* Mobile */
+/* Mobile Responsive */
 @media (max-width: 768px) {
   .hero {
     height: 90vh;
@@ -142,34 +208,128 @@
     background-attachment: scroll;
   }
 
-  /* ↑ MIN VALUES INCREASED SLIGHTLY */
+  .hero-container {
+    padding: 0 20px;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .hero-badge {
+    font-size: 13px;
+    padding: 10px 18px;
+    margin-bottom: 32px;
+  }
+
+  .hero-badge svg {
+    width: 15px;
+    height: 15px;
+  }
+
   .hero-title {
-    font-size: clamp(2.4rem, 6vw, 3rem) !important;
+    font-size: 2.8rem !important;
+    margin-bottom: 28px !important;
   }
 
   .hero-description {
-    font-size: clamp(1.15rem, 3vw, 1.25rem) !important;
+    font-size: 1.15rem !important;
+    margin-bottom: 40px;
+    line-height: 1.7 !important;
+  }
+
+  .hero-buttons {
+    gap: 14px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+  }
+
+  .btn {
+    padding: 13px 22px !important;
+    font-size: 15px !important;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .btn svg {
+    width: 17px !important;
+    height: 17px !important;
   }
 }
 
 /* Small Mobile */
 @media (max-width: 480px) {
+  .hero {
+    height: 92vh;
+    min-height: 580px;
+  }
+
+  .hero-container {
+    padding: 0 18px;
+  }
+
+  .hero-badge {
+    font-size: 12px;
+    padding: 9px 16px;
+    gap: 7px;
+    margin-bottom: 28px;
+  }
+
   .hero-title {
-    font-size: clamp(2.2rem, 6.5vw, 2.8rem) !important;
+    font-size: 2.3rem !important;
+    margin-bottom: 24px !important;
   }
 
   .hero-description {
-    font-size: clamp(1.1rem, 3.2vw, 1.2rem) !important;
+    font-size: 1.05rem !important;
+    margin-bottom: 36px;
+    line-height: 1.65 !important;
+  }
+
+  .hero-buttons {
+    gap: 12px;
+  }
+
+  .btn {
+    padding: 12px 18px !important;
+    font-size: 14px !important;
+    gap: 7px !important;
+  }
+
+  .btn svg {
+    width: 15px !important;
+    height: 15px !important;
   }
 }
 
-/* Extra Small */
+/* Extra Small Screens */
 @media (max-width: 360px) {
+  .hero {
+    height: 93vh;
+    min-height: 560px;
+  }
+
+  .hero-badge {
+    font-size: 11px;
+    padding: 8px 14px;
+  }
+
+  .hero-badge span {
+    font-size: 11px;
+  }
+
   .hero-title {
-    font-size: clamp(2rem, 7vw, 2.5rem) !important;
+    font-size: 2rem !important;
+    margin-bottom: 22px !important;
   }
 
   .hero-description {
-    font-size: clamp(1.05rem, 3.5vw, 1.15rem) !important;
+    font-size: 1rem !important;
+    margin-bottom: 32px;
+  }
+
+  .btn {
+    padding: 11px 16px !important;
+    font-size: 13px !important;
   }
 }
