@@ -48,12 +48,15 @@
   border: 1px solid #0d6efd;
   border-bottom: 2px solid #0d6efd;
 
+  /* Added subtle shadow */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .note-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
 }
 
 /* File icon */
@@ -147,11 +150,12 @@
   pointer-events: none;
   border: 1px solid #e0e0e0;
   border-bottom: 2px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
 }
 
 .skeleton-card:hover {
   transform: none;
-  box-shadow: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .skeleton {
