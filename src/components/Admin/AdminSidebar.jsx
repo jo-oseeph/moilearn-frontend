@@ -1,7 +1,7 @@
 // components/Admin/Sidebar.jsx
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { LayoutDashboard, FileText } from "lucide-react"; // icons
+import { Home, LayoutDashboard, FileText } from "lucide-react"; // icons
 import "./AdminSidebar.css";
 
 function Sidebar({ isOpen }) {
@@ -12,6 +12,12 @@ function Sidebar({ isOpen }) {
       <h2 className="sidebar-title">Admin</h2>
       <nav>
         <ul>
+          <li className={location.pathname === "/" ? "active" : ""}>
+            <Link to="/">
+              <Home size={20} />
+              <span className="link-text">Home</span>
+            </Link>
+          </li>
           <li className={location.pathname === "/admin/dashboard" ? "active" : ""}>
             <Link to="/admin/dashboard">
               <LayoutDashboard size={20} />
