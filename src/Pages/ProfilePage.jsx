@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import { User, Mail, Lock, LogOut, Edit2, Eye, EyeOff, ChevronDown, ChevronUp } from "lucide-react";
+import {  Lock, LogOut, Edit2, Eye, EyeOff, ChevronDown, ChevronUp } from "lucide-react";
 import "./ProfilePage.css";
 import API_BASE_URL from "../config/api";
 
