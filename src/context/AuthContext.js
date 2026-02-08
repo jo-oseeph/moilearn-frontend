@@ -24,10 +24,22 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+  const updateUser = (userData) => {
+    setUser(userData);
+    // Update in localStorage/sessionStorage as well
+    const currentAuth = AuthService.getUser();
+    if (currentAuth) {
+      // Preserve the token and expiry, just update user data
+      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+      const expiry = localStorage.getItem('expiry') || sessionStorage.getItem('expiry');
+      AuthService.saveAuth(token, userData, expiry);
+    }
+  };
+
   const role = user?.role || "user";
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, user, role, login, logout }}>
+    <AuthContext.Provider value={{ isLoggedIn, user, role, login, logout, updateUser }}>
       {children}
     </AuthContext.Provider>
   );

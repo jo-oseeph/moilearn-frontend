@@ -1,4 +1,3 @@
-
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
@@ -11,18 +10,18 @@ import { HomePage } from "./Pages/HomePage";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import Forbidden from "./Pages/ForbiddenPage";
+import NotesPage from "./Pages/NotesPage";
 
 // User pages
 import Dashboard from "./Pages/Dashboard";
 import UploadNotePage from "./Pages/UploadNotePage";
 import MyUploads from "./Pages/MyUploads";
+import ProfilePage from './Pages/ProfilePage';
 
 // Admin pages
 import AdminLayout from "./layouts/AdminLayout";
 import AdminDashboard from "./Pages/Admin/AdminDashboard";
 import ManageNotes from "./Pages/Admin/ManageNotes";
-import NotesPage from "./Pages/NotesPage";
-
 
 // Wrapper to conditionally show Navbar and Footer
 function LayoutWrapper({ children }) {
@@ -52,11 +51,19 @@ function App() {
                 <Route path="/forbidden" element={<Forbidden />} />
                 <Route path="/notes" element={<NotesPage />} />
 
-                {/* --- User routes (protected) --- */}
+                {/* --- Protected User routes --- */}
+                <Route
+                  path="/profile"
+                  element={
+                    <ProtectedRoute>
+                      <ProfilePage />
+                    </ProtectedRoute>
+                  }
+                />
                 <Route
                   path="/dashboard"
                   element={
-                    <ProtectedRoute requiredRole="user">
+                    <ProtectedRoute>
                       <Dashboard />
                     </ProtectedRoute>
                   }
@@ -64,7 +71,7 @@ function App() {
                 <Route
                   path="/upload"
                   element={
-                    <ProtectedRoute requiredRole="user">
+                    <ProtectedRoute>
                       <UploadNotePage />
                     </ProtectedRoute>
                   }
@@ -72,7 +79,7 @@ function App() {
                 <Route
                   path="/my-uploads"
                   element={
-                    <ProtectedRoute requiredRole="user">
+                    <ProtectedRoute>
                       <MyUploads />
                     </ProtectedRoute>
                   }
@@ -108,7 +115,6 @@ function App() {
         </div>
       </AuthProvider>
     </Router>
-    
   );
 }
 
