@@ -1,11 +1,12 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { FiDownload, FiFileText, FiCloud } from "react-icons/fi";
+import { FiDownload, FiFileText, FiCloud, FiEye } from "react-icons/fi";
 import "./NotesPage.css";
 import API_BASE_URL from "../config/api"; 
 
 const NotesPage = () => {
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [downloadingId, setDownloadingId] = useState(null);
 
   const [search, setSearch] = useState("");
   const [category,] = useState("all");
@@ -50,8 +51,54 @@ const NotesPage = () => {
     });
   }, [notes, search, category]);
 
-  const handleDownload = (id) => {
-    window.location.href = `${API_BASE_URL}/api/notes/${id}/download`;
+  const handleDownload = async (id, courseCode, courseTitle) => {
+    setDownloadingId(id);
+    
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/notes/${id}/download`, {
+        credentials: "include",
+      });
+
+      if (!response.ok) {
+        throw new Error("Download failed");
+      }
+
+      // Get the filename from Content-Disposition header or use default
+      const contentDisposition = response.headers.get('Content-Disposition');
+      let filename = `${courseCode}_${courseTitle}.pdf`;
+      
+      if (contentDisposition) {
+        const filenameMatch = contentDisposition.match(/filename="?(.+)"?/);
+        if (filenameMatch) {
+          filename = filenameMatch[1];
+        }
+      }
+
+      // Convert response to blob
+      const blob = await response.blob();
+      
+      // Create download link
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      
+      // Cleanup
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+
+    } catch (err) {
+      console.error("Download failed:", err);
+      alert("Failed to download file. Please try again.");
+    } finally {
+      setDownloadingId(null);
+    }
+  };
+
+  const handlePreview = (id) => {
+    window.open(`${API_BASE_URL}/api/notes/${id}/preview`, '_blank');
   };
 
   // Skeleton Card Component
@@ -119,13 +166,33 @@ const NotesPage = () => {
               </p>
 
               <div className="card-actions">
-                <button
-                  className="download-btn"
-                  onClick={() => handleDownload(note._id)}
-                >
-                  <span>Download</span>
-                  <FiDownload />
-                </button>
+                <div className="action-buttons">
+                  <button
+                    className="preview-btn"
+                    onClick={() => handlePreview(note._id)}
+                    title="Preview"
+                  >
+                    <FiEye />
+                  </button>
+
+                  <button
+                    className="download-btn"
+                    onClick={() => handleDownload(note._id, note.courseCode, note.courseTitle)}
+                    disabled={downloadingId === note._id}
+                  >
+                    {downloadingId === note._id ? (
+                      <>
+                        <span>Downloading...</span>
+                        <div className="spinner"></div>
+                      </>
+                    ) : (
+                      <>
+                        <span>Download</span>
+                        <FiDownload />
+                      </>
+                    )}
+                  </button>
+                </div>
 
                 <div className="download-count">
                   <FiCloud />
