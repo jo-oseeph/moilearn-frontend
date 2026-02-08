@@ -1,56 +1,24 @@
 /* Login Container */
 .login-container {
-  min-height: 100vh;
+  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  background: #ffffff;
   padding: 2rem 1rem;
   position: relative;
-  overflow: hidden;
-}
-
-.login-container::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-  animation: float 15s ease-in-out infinite;
-}
-
-.login-container::after {
-  content: '';
-  position: absolute;
-  bottom: -50%;
-  left: -50%;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
-  animation: float 20s ease-in-out infinite reverse;
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translate(0, 0);
-  }
-  50% {
-    transform: translate(50px, 50px);
-  }
 }
 
 /* Login Card */
 .login-card {
   background: white;
+  border: 2px solid #0d6efd;
   border-radius: 1rem;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  padding: 2rem 2.5rem;
+  box-shadow: 0 4px 12px rgba(13, 110, 253, 0.15);
+  padding: 2.5rem 3rem;
   width: 100%;
-  max-width: 420px;
+  max-width: 480px;
   position: relative;
-  z-index: 1;
   animation: slideUp 0.5s ease-out;
 }
 
@@ -68,32 +36,32 @@
 /* Login Header */
 .login-header {
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .login-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 56px;
-  height: 56px;
-  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
   border-radius: 1rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
   color: white;
-  box-shadow: 0 4px 15px rgba(22, 163, 74, 0.3);
+  box-shadow: 0 4px 15px rgba(13, 110, 253, 0.3);
 }
 
 .login-header h2 {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 700;
   color: #1f2937;
-  margin: 0 0 0.35rem 0;
+  margin: 0 0 0.5rem 0;
 }
 
 .login-header p {
   color: #6b7280;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   margin: 0;
 }
 
@@ -103,7 +71,7 @@
   border: 1px solid #fecaca;
   border-radius: 0.5rem;
   padding: 0.75rem 1rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
   animation: shake 0.3s ease-in-out;
 }
 
@@ -128,19 +96,19 @@
 
 /* Form */
 .login-form {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .form-group {
-  margin-bottom: 1.15rem;
+  margin-bottom: 1.25rem;
 }
 
 .form-group label {
   display: block;
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: #374151;
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.5rem;
 }
 
 .input-wrapper {
@@ -149,30 +117,22 @@
   align-items: center;
 }
 
-.input-icon {
-  position: absolute;
-  left: 0.875rem;
-  color: #9ca3af;
-  pointer-events: none;
-  z-index: 1;
-}
-
 .input-wrapper input {
   width: 100%;
-  padding: 0.75rem 0.875rem 0.75rem 2.75rem;
+  padding: 0.85rem 1rem;
   border: 2px solid #e5e7eb;
   border-radius: 0.5rem;
   font-size: 0.95rem;
   color: #1f2937;
   transition: all 0.2s ease;
-  background-color: #f9fafb;
+  background-color: #ffffff;
 }
 
 .input-wrapper input:focus {
   outline: none;
-  border-color: #16a34a;
+  border-color: #0d6efd;
   background-color: white;
-  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.1);
 }
 
 .input-wrapper input:disabled {
@@ -202,7 +162,7 @@
 }
 
 .password-toggle:hover {
-  color: #16a34a;
+  color: #0d6efd;
 }
 
 .password-toggle:focus {
@@ -213,11 +173,11 @@
 .form-footer {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
 }
 
 .forgot-link {
-  color: #16a34a;
+  color: #0d6efd;
   font-size: 0.875rem;
   font-weight: 500;
   text-decoration: none;
@@ -225,7 +185,7 @@
 }
 
 .forgot-link:hover {
-  color: #15803d;
+  color: #0a58ca;
   text-decoration: underline;
 }
 
@@ -236,21 +196,21 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  padding: 0.85rem 1.5rem;
+  background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
   color: white;
   border: none;
   border-radius: 0.5rem;
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+  box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
 }
 
 .login-button:hover:not(:disabled) {
-  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
-  box-shadow: 0 6px 20px rgba(29, 78, 216, 0.4);
+  background: linear-gradient(135deg, #0a58ca 0%, #084298 100%);
+  box-shadow: 0 6px 20px rgba(13, 110, 253, 0.4);
   transform: translateY(-2px);
 }
 
@@ -283,7 +243,7 @@
 /* Register Section */
 .register-section {
   text-align: center;
-  padding-top: 0.75rem;
+  padding-top: 1rem;
   border-top: 1px solid #e5e7eb;
 }
 
@@ -294,35 +254,36 @@
 }
 
 .register-link {
-  color: #1d4ed8;
+  color: #0d6efd;
   font-weight: 600;
   text-decoration: none;
   transition: all 0.2s ease;
 }
 
 .register-link:hover {
-  color: #1e40af;
+  color: #0a58ca;
   text-decoration: underline;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .login-container {
+    min-height: 80vh;
     padding: 1.5rem 1rem;
   }
 
   .login-card {
-    padding: 1.75rem 1.5rem;
+    padding: 2rem 2rem;
     max-width: 100%;
   }
 
   .login-header h2 {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
 
   .login-icon {
-    width: 52px;
-    height: 52px;
+    width: 56px;
+    height: 56px;
   }
 
   .form-group {
@@ -332,25 +293,26 @@
 
 @media (max-width: 480px) {
   .login-container {
+    min-height: 80vh;
     padding: 1rem;
   }
 
   .login-card {
-    padding: 1.5rem 1.25rem;
+    padding: 1.75rem 1.5rem;
     border-radius: 0.75rem;
   }
 
   .login-header h2 {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
 
   .login-header p {
-    font-size: 0.85rem;
+    font-size: 0.875rem;
   }
 
   .login-icon {
-    width: 48px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
   }
 
   .login-icon svg {
@@ -359,17 +321,8 @@
   }
 
   .input-wrapper input {
-    padding: 0.7rem 2.5rem 0.7rem 2.5rem;
+    padding: 0.75rem 0.875rem;
     font-size: 0.9rem;
-  }
-
-  .input-icon {
-    left: 0.75rem;
-  }
-
-  .input-icon svg {
-    width: 16px;
-    height: 16px;
   }
 
   .password-toggle {
@@ -382,8 +335,8 @@
   }
 
   .login-button {
-    padding: 0.7rem 1.25rem;
-    font-size: 0.9rem;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.95rem;
   }
 
   .register-section p {

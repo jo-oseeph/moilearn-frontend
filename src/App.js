@@ -106,6 +106,7 @@ function App() {
         </div>
       </AuthProvider>
     </Router>
+    
   );
 }
 
