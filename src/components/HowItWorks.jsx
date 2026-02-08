@@ -8,7 +8,7 @@ const HowItWorks = () => {
       id: 1,
       title: "Create an Account",
       description:
-        "Sign up in seconds to access verified past papers and academic resources.",
+        "Sign up in seconds to share your academic resources with friends.",
       icon: <UserPlus size={32} />,
     },
     {

@@ -5,13 +5,11 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-container">
-        {/* Brand Section */}
         <div className="footer-brand">
           <h2>Moilearn</h2>
-          <p>Empowering students through easy access to notes and past papers.</p>
+          <p>Empowering students through easy access to past papers.</p>
         </div>
 
-        {/* Navigation Links */}
         <div className="footer-links">
           <h4>Quick Links</h4>
           <ul>

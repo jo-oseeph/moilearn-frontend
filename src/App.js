@@ -1,8 +1,9 @@
-// App.js
+
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 // Public pages
@@ -16,14 +17,14 @@ import Dashboard from "./Pages/Dashboard";
 import UploadNotePage from "./Pages/UploadNotePage";
 import MyUploads from "./Pages/MyUploads";
 
-// Admin pages + layout
+// Admin pages
 import AdminLayout from "./layouts/AdminLayout";
 import AdminDashboard from "./Pages/Admin/AdminDashboard";
 import ManageNotes from "./Pages/Admin/ManageNotes";
 import NotesPage from "./Pages/NotesPage";
 
 
-// Wrapper to conditionally show Navbar
+// Wrapper to conditionally show Navbar and Footer
 function LayoutWrapper({ children }) {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith("/admin");
@@ -31,6 +32,7 @@ function LayoutWrapper({ children }) {
     <>
       {!isAdminRoute && <Navbar />}
       {children}
+      {!isAdminRoute && <Footer />}
     </>
   );
 }

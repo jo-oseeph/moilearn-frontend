@@ -17,17 +17,26 @@
 
 .footer h2 {
   color: white;
+  text-align: left;
 }
 
 .footer h4 {
   color: white;
   margin-bottom: 0.8rem;
   font-size: 1.1rem;
+  text-align: left;
 }
 
 .footer p {
   margin-bottom: 0.5rem;
   line-height: 1.4;
+  text-align: left;
+}
+
+.footer-brand,
+.footer-links,
+.footer-contact {
+  text-align: left;
 }
 
 .footer-links ul {
@@ -37,6 +46,7 @@
 
 .footer-links ul li {
   margin-bottom: 0.4rem;
+  text-align: left;
 }
 
 .footer-links ul li a {
@@ -62,7 +72,23 @@
 @media (max-width: 768px) {
   .footer-container {
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+  }
+
+  .footer-brand,
+  .footer-links,
+  .footer-contact {
+    text-align: left;
+    width: 100%;
+  }
+
+  .footer h2,
+  .footer h4,
+  .footer p {
+    text-align: left;
+  }
+
+  .footer-links ul li {
+    text-align: left;
   }
 }
