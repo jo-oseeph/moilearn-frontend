@@ -12,7 +12,13 @@ export const AuthProvider = ({ children }) => {
     setUser(AuthService.getUser());
   }, []);
 
-  const login = (token, userData, expiry) => {
+  const login = (token, userData, expiryInSeconds) => {
+    // If expiry is provided (normal login), convert to ms timestamp
+    // Otherwise, default to 7 days from now (Google login)
+    const expiry = expiryInSeconds
+      ? Date.now() + expiryInSeconds * 1000
+      : Date.now() + 7 * 24 * 60 * 60 * 1000;
+
     AuthService.saveAuth(token, userData, expiry);
     setIsLoggedIn(true);
     setUser(userData);
@@ -26,13 +32,13 @@ export const AuthProvider = ({ children }) => {
 
   const updateUser = (userData) => {
     setUser(userData);
+
     // Update in localStorage/sessionStorage as well
-    const currentAuth = AuthService.getUser();
-    if (currentAuth) {
-      // Preserve the token and expiry, just update user data
-      const token = localStorage.getItem('token') || sessionStorage.getItem('token');
-      const expiry = localStorage.getItem('expiry') || sessionStorage.getItem('expiry');
-      AuthService.saveAuth(token, userData, expiry);
+    const currentToken = localStorage.getItem("token") || sessionStorage.getItem("token");
+    const expiry = localStorage.getItem("expiry") || sessionStorage.getItem("expiry");
+
+    if (currentToken && expiry) {
+      AuthService.saveAuth(currentToken, userData, expiry);
     }
   };
 
