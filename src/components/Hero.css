@@ -305,8 +305,8 @@
 /* Extra Small Screens */
 @media (max-width: 360px) {
   .hero {
-    height: 93vh;
-    min-height: 560px;
+    height: 50vh;
+    /* min-height: 560px; */
   }
 
   .hero-badge {
