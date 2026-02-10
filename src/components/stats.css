@@ -3,7 +3,7 @@
 ================================ */
 
 .stats-section {
-  padding: 80px 20px;
+  padding: 40px 20px;
   background: linear-gradient(135deg, #f8f9ff 0%, #eef3ff 100%);
   position: relative;
   overflow: hidden;
@@ -14,199 +14,100 @@
   margin: 0 auto;
 }
 
-.section-header {
-  text-align: center;
-  margin-bottom: 60px;
-}
-
-.section-title {
-  font-size: 2.4rem;
-  font-weight: 800;
-  margin-bottom: 12px;
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.section-subtitle {
-  font-size: 1.05rem;
-  color: #555;
-  max-width: 620px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
-
 /* ===============================
-   Grid
+   Grid - Responsive with Scroll
 ================================ */
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 28px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
 
 /* ===============================
-   Card Base
+   Card Base - Compact
 ================================ */
 
 .stats-card {
   background: #ffffff;
-  border-radius: 16px;
-  padding: 32px 26px;
-  position: relative;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-  transition: all 0.35s ease;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
   overflow: hidden;
 }
 
 .stats-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.14);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
 /* ===============================
-   Top Border Accent
-================================ */
-
-.card-border-top {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 5px;
-  width: 100%;
-}
-
-.notes-card .card-border-top {
-  background: linear-gradient(90deg, #2563eb, #60a5fa);
-}
-
-.papers-card .card-border-top {
-  background: linear-gradient(90deg, #16a34a, #4ade80);
-}
-
-.faculties-card .card-border-top {
-  background: linear-gradient(90deg, #f97316, #facc15);
-}
-
-/* ===============================
-   Icon
+   Icon - Compact
 ================================ */
 
 .card-icon {
-  width: 64px;
-  height: 64px;
-  border-radius: 16px;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 22px;
+  flex-shrink: 0;
 }
 
-.notes-card .card-icon {
-  background: rgba(37, 99, 235, 0.12);
-  color: #2563eb;
-}
-
-.papers-card .card-icon {
-  background: rgba(22, 163, 74, 0.12);
-  color: #16a34a;
-}
-
-.faculties-card .card-icon {
-  background: rgba(249, 115, 22, 0.12);
-  color: #f97316;
-}
-
-/* ===============================
-   Content
-================================ */
-
-.card-number {
-  font-size: 3rem;
-  font-weight: 800;
-  margin-bottom: 6px;
-  line-height: 1;
-}
-
-.notes-card .card-number {
-  color: #2563eb;
-}
-
-.papers-card .card-number {
-  color: #16a34a;
-}
-
-.faculties-card .card-number {
-  color: #f97316;
-}
-
-.card-label {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #222;
-  margin-bottom: 10px;
-}
-
-.card-description {
-  font-size: 0.95rem;
-  color: #666;
-  line-height: 1.5;
-  margin-bottom: 22px;
-}
-
-/* ===============================
-   Button
-================================ */
-
-.card-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 20px;
-  border-radius: 8px;
-  border: none;
-  font-weight: 600;
-  font-size: 0.95rem;
-  cursor: pointer;
-  color: #fff;
-  transition: all 0.3s ease;
-}
-
-.notes-card .card-button {
+.notes-card {
   background: linear-gradient(135deg, #2563eb, #3b82f6);
 }
 
-.papers-card .card-button {
+.notes-card .card-icon {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.papers-card {
   background: linear-gradient(135deg, #16a34a, #22c55e);
 }
 
-.faculties-card .card-button {
-  background: linear-gradient(135deg, #f97316, #facc15);
+.papers-card .card-icon {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
 }
 
-.card-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+.faculties-card {
+  background: linear-gradient(135deg, #f97316, #fb923c);
+}
+
+.faculties-card .card-icon {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
 }
 
 /* ===============================
-   Trend Badge
+   Content - Compact
 ================================ */
 
-.card-trend {
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.75rem;
+.card-content {
+  flex: 1;
+}
+
+.card-label {
+  font-size: 0.875rem;
   font-weight: 600;
-  color: #16a34a;
-  background: rgba(22, 163, 74, 0.12);
-  padding: 6px 10px;
-  border-radius: 20px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+
+.card-number {
+  font-size: 1.875rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1;
+  margin: 0;
 }
 
 /* ===============================
@@ -214,14 +115,14 @@
 ================================ */
 
 .loading-skeleton {
-  width: 120px;
-  height: 44px;
-  border-radius: 8px;
+  width: 60px;
+  height: 30px;
+  border-radius: 6px;
   background: linear-gradient(
     90deg,
-    #f0f0f0 25%,
-    #e0e0e0 37%,
-    #f0f0f0 63%
+    rgba(255, 255, 255, 0.3) 25%,
+    rgba(255, 255, 255, 0.5) 37%,
+    rgba(255, 255, 255, 0.3) 63%
   );
   background-size: 400% 100%;
   animation: shimmer 1.4s ease infinite;
@@ -241,7 +142,7 @@
 ================================ */
 
 .animated-number {
-  animation: popIn 0.8s ease;
+  animation: popIn 0.6s ease;
 }
 
 @keyframes popIn {
@@ -256,43 +157,92 @@
 }
 
 /* ===============================
-   Responsive
+   Responsive - Mobile Swipeable
 ================================ */
 
 @media (max-width: 768px) {
   .stats-section {
-    padding: 60px 16px;
+    padding: 30px 0;
   }
 
-  .section-title {
-    font-size: 2rem;
+  .stats-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    padding: 0 16px;
+  }
+
+  .stats-container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+
+  .stats-grid {
+    display: flex;
+    gap: 12px;
+    width: max-content;
   }
 
   .stats-card {
-    padding: 26px 20px;
+    min-width: 200px;
+    max-width: 200px;
+    padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .card-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .card-label {
+    font-size: 0.8rem;
   }
 
   .card-number {
-    font-size: 2.5rem;
-  }
-
-  .card-trend {
-    position: static;
-    margin-bottom: 14px;
+    font-size: 1.5rem;
   }
 }
 
 @media (max-width: 480px) {
-  .section-title {
-    font-size: 1.8rem;
+  .stats-card {
+    min-width: 170px;
+    max-width: 170px;
+    padding: 14px;
+  }
+
+  .card-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .card-label {
+    font-size: 0.75rem;
   }
 
   .card-number {
-    font-size: 2.2rem;
+    font-size: 1.375rem;
+  }
+}
+
+/* ===============================
+   Tablet - 2 columns
+================================ */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
   }
 
-  .card-button {
-    width: 100%;
-    justify-content: center;
+  .stats-card {
+    padding: 18px;
+  }
+
+  .card-number {
+    font-size: 1.75rem;
   }
 }
