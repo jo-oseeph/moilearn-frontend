@@ -33,11 +33,14 @@
   border-radius: 12px;
   padding: 20px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 16px;
+  justify-content: center;
+  gap: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
   overflow: hidden;
+  text-align: center;
 }
 
 .stats-card:hover {
@@ -188,9 +191,7 @@
     min-width: 200px;
     max-width: 200px;
     padding: 16px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+    gap: 10px;
   }
 
   .card-icon {
