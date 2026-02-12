@@ -7,7 +7,6 @@ import { auth } from "../firebase";
 import API_BASE_URL from "../config/api";
 import "./Login.css";
 
-
 const GoogleIcon = () => (
   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M19.6 10.227c0-.709-.064-1.39-.182-2.045H10v3.868h5.382a4.6 4.6 0 01-1.996 3.018v2.51h3.232c1.891-1.742 2.982-4.305 2.982-7.35z" fill="#4285F4"/>
@@ -42,7 +41,7 @@ const Login = () => {
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
-  // Google login
+  // ✅ SEAMLESS GOOGLE LOGIN - No popup errors, auto-merges accounts
   const handleGoogleLogin = async () => {
     if (googleLoading) return;
     setGoogleLoading(true);
@@ -50,10 +49,12 @@ const Login = () => {
 
     try {
       const provider = new GoogleAuthProvider();
+      
+      // Get fresh Google token
       const result = await signInWithPopup(auth, provider);
-
       const idToken = await result.user.getIdToken();
 
+      // Send to backend - it handles account merging automatically
       const res = await fetch(`${API_BASE_URL}/api/auth/google`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -61,26 +62,46 @@ const Login = () => {
       });
 
       const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Google login failed");
+      
+      if (!res.ok) {
+        throw new Error(data.message || "Google login failed");
+      }
 
-      const { token, role, email, username, _id } = data;
+      const { token, role, email, username, _id, profilePicture, authMethods } = data;
 
       const user = {
         role: role || "user",
         email,
         username: username || result.user.displayName || "",
         _id,
+        profilePicture,
+        authMethods,
       };
 
-      const expiry = Date.now() + 7 * 24 * 60 * 60 * 1000; // 7 days default
+      const expiry = Date.now() + 7 * 24 * 60 * 60 * 1000; // 7 days
 
       login(token, user, expiry);
 
-      if (role === "admin") navigate("/admin/dashboard", { replace: true });
-      else navigate("/dashboard", { replace: true });
+      // Redirect based on role
+      if (role === "admin") {
+        navigate("/admin/dashboard", { replace: true });
+      } else {
+        navigate("/dashboard", { replace: true });
+      }
+      
     } catch (err) {
-      console.error(err);
-      setError(err.message || "Google sign-in failed");
+      console.error("Google sign-in error:", err);
+      
+      // Handle specific Firebase errors
+      if (err.code === 'auth/popup-closed-by-user') {
+        setError("Sign-in cancelled. Please try again.");
+      } else if (err.code === 'auth/popup-blocked') {
+        setError("Popup blocked. Please allow popups for this site.");
+      } else if (err.code === 'auth/network-request-failed') {
+        setError("Network error. Please check your connection.");
+      } else {
+        setError(err.message || "Google sign-in failed. Please try again.");
+      }
     } finally {
       setGoogleLoading(false);
     }
@@ -89,12 +110,15 @@ const Login = () => {
   // Normal email/password login
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     if (!formData.email || !formData.password) {
       setError("Email and password are required");
       return;
     }
 
     setIsLoading(true);
+    setError("");
+    
     try {
       const res = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: "POST",
@@ -103,25 +127,36 @@ const Login = () => {
       });
 
       const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Login failed");
+      
+      if (!res.ok) {
+        throw new Error(data.message || "Login failed");
+      }
 
-      const { token, role, email, username, _id, expiresIn } = data;
+      const { token, role, email, username, _id, expiresIn, profilePicture, authMethods } = data;
+      
       const user = {
         role,
         email,
         username: username || "",
         _id,
+        profilePicture,
+        authMethods,
       };
+      
       const expiry = expiresIn ? Date.now() + expiresIn * 1000 : undefined;
 
       login(token, user, expiry);
 
-      // Redirect
-      if (role === "admin") navigate("/admin/dashboard", { replace: true });
-      else navigate("/dashboard", { replace: true });
+      // Redirect based on role
+      if (role === "admin") {
+        navigate("/admin/dashboard", { replace: true });
+      } else {
+        navigate("/dashboard", { replace: true });
+      }
+      
     } catch (err) {
-      console.error(err);
-      setError(err.message || "Network error, try again");
+      console.error("Login error:", err);
+      setError(err.message || "Network error. Please try again.");
     } finally {
       setIsLoading(false);
     }
