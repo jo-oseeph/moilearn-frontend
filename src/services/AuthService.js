@@ -3,7 +3,7 @@ const USER_KEY = "moilearn_user";
 const EXPIRY_KEY = "moilearn_expiry";
 
 const AuthService = {
-  // Save token, user, and expiry (ms timestamp)
+  // Save token, user, and expiry 
   saveAuth(token, user, expiry) {
     localStorage.setItem(TOKEN_KEY, token);
     localStorage.setItem(USER_KEY, JSON.stringify(user));

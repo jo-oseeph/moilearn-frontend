@@ -41,7 +41,7 @@ const Login = () => {
 
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
-  // ✅ SEAMLESS GOOGLE LOGIN - No popup errors, auto-merges accounts
+ 
   const handleGoogleLogin = async () => {
     if (googleLoading) return;
     setGoogleLoading(true);

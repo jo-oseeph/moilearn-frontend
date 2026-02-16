@@ -51,7 +51,6 @@ function App() {
                 <Route path="/forbidden" element={<Forbidden />} />
                 <Route path="/notes" element={<NotesPage />} />
 
-                {/* --- Protected User routes --- */}
                 <Route
                   path="/profile"
                   element={
@@ -84,8 +83,6 @@ function App() {
                     </ProtectedRoute>
                   }
                 />
-
-                {/* --- Admin routes (protected, with layout) --- */}
                 <Route
                   path="/admin/dashboard"
                   element={
@@ -106,8 +103,6 @@ function App() {
                     </ProtectedRoute>
                   }
                 />
-
-                {/* --- Catch all (404) --- */}
                 <Route path="*" element={<div>Page not found</div>} />
               </Routes>
             </main>
