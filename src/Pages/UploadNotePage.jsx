@@ -261,11 +261,6 @@ required
 
 </select>
 
-
-
-
-{/* semester */}
-
 <select
 name="semester"
 value={formData.semester}
