@@ -42,7 +42,7 @@ const AuthService = {
     if (!token) return false;
 
     if (expiry && Date.now() > expiry) {
-      this.clearAuth(); // Auto logout expired token
+      this.clearAuth(); 
       return false;
     }
 

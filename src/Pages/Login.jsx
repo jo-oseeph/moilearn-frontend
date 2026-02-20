@@ -18,7 +18,7 @@ const Login = () => {
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  // Redirect if already logged in
+  
   useEffect(() => {
     if (isLoggedIn) {
       if (role === "admin") {
