@@ -36,12 +36,12 @@
 /* Card */
 .note-card {
   background: #ffffff;
-  border-radius: 10px;
+  border-radius: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 1.4rem 1rem 0.9rem;
-  border: 1px solid #0d6efd;
+  border: 2px solid #0d6efd;
   border-bottom: 2px solid #0d6efd;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -82,35 +82,36 @@
   text-align: center;
 }
 
-/* Actions */
+/* Actions — three columns: [preview] [download btn] [count] */
 .card-actions {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 36px 1fr 36px;
   align-items: center;
   gap: 0.5rem;
 }
 
+/* action-buttons holds only the preview icon, sits in column 1 */
 .action-buttons {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
+  display: contents;
 }
 
-/* Preview button */
+/* Preview button — left icon */
 .preview-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   background: #198754;
   color: #ffffff;
-  
+
   border: none;
   border-radius: 6px;
-  
-  padding: 0.45rem;
+
+  width: 36px;
+  height: 36px;
   font-size: 1rem;
-  
+  padding: 0;
+
   cursor: pointer;
   transition: background 0.2s ease;
 }
@@ -119,10 +120,11 @@
   background: #0b5ed7 !important;
 }
 
-/* Download button */
+/* Download button — center, takes remaining space */
 .download-btn {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.45rem;
 
   background: #198754;
@@ -131,14 +133,15 @@
   border: none;
   border-radius: 6px;
 
-  padding: 0.45rem 0.85rem;
+  height: 36px;
+  width: 100%;
+  padding: 0 0.75rem;
   font-size: 0.85rem;
   font-weight: 500;
+  white-space: nowrap;
 
   cursor: pointer;
   transition: background 0.2s ease;
-  min-width: 110px;
-  justify-content: center;
 }
 
 .download-btn:hover:not(:disabled) {
@@ -158,6 +161,7 @@
   border-top: 2px solid transparent;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
+  flex-shrink: 0;
 }
 
 @keyframes spin {
@@ -165,14 +169,26 @@
   100% { transform: rotate(360deg); }
 }
 
-/* Download count */
+/* Download count — right icon */
 .download-count {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  justify-content: center;
+  gap: 0.2rem;
+
+  background: #198754;
+  color: #ffffff;
+
+  border: none;
+  border-radius: 6px;
+
+  width: 36px;
+  height: 36px;
+  font-size: 0.72rem;
   font-weight: 600;
-  color: #198754;
-  font-size: 0.85rem;
+
+  cursor: default;
+  flex-shrink: 0;
 }
 
 /* Icons sizing consistency */
@@ -180,6 +196,7 @@
 .download-count svg,
 .preview-btn svg {
   font-size: 1rem;
+  flex-shrink: 0;
 }
 
 /* States */
@@ -250,49 +267,26 @@
 }
 
 .skeleton-button {
-  height: 32px;
+  height: 36px;
   width: 100px;
   border-radius: 6px;
 }
 
 .skeleton-count {
-  height: 20px;
-  width: 40px;
-  border-radius: 4px;
+  height: 36px;
+  width: 36px;
+  border-radius: 6px;
 }
 
-/* Responsive adjustments */
+/* Responsive — layout holds on small screens too */
 @media (max-width: 768px) {
   .card-actions {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
-    width: 100%;
-  }
-
-  .action-buttons {
-    display: flex;
-    flex: 1;
-    gap: 0.5rem;
-    align-items: center;
-  }
-
-  .preview-btn {
-    flex: 1;
-    justify-content: center;
-    padding: 0.45rem;
+    grid-template-columns: 36px 1fr 36px;
+    gap: 0.4rem;
   }
 
   .download-btn {
-    flex: 1;
-    min-width: unset;
-    padding: 0.45rem;
-    font-size: 0.8rem;
-  }
-
-  .download-count {
-    flex: 0 0 auto;
-    justify-content: center;
+    font-size: 0.78rem;
+    padding: 0 0.5rem;
   }
 }
