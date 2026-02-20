@@ -13,8 +13,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = (token, userData, expiryInSeconds) => {
-    // If expiry is provided (normal login), convert to ms timestamp
-    // Otherwise, default to 7 days from now (Google login)
+   
     const expiry = expiryInSeconds
       ? Date.now() + expiryInSeconds * 1000
       : Date.now() + 7 * 24 * 60 * 60 * 1000;
