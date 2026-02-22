@@ -26,14 +26,12 @@
   min-width: 240px;
 }
 
-/* Grid */
 .notes-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1.5rem;
 }
 
-/* Card */
 .note-card {
   background: linear-gradient(145deg, #ffffff, #f0f7ff);
   border-radius: 20px;
@@ -69,7 +67,6 @@
   border-color: rgba(13, 110, 253, 0.4);
 }
 
-/* File icon */
 .file-icon {
   font-size: 2.4rem;
   color: #0d6efd;
@@ -78,7 +75,6 @@
   filter: drop-shadow(0 2px 4px rgba(13, 110, 253, 0.2));
 }
 
-/* Text */
 .note-card h3 {
   font-size: 0.95rem;
   margin: 0.4rem 0 0.2rem;
@@ -112,12 +108,10 @@
   gap: 0.45rem;
 }
 
-/* action-buttons holds preview + download, becomes transparent to grid */
 .action-buttons {
   display: contents;
 }
 
-/* Preview button */
 .preview-btn {
   display: flex;
   align-items: center;
@@ -145,7 +139,6 @@
   box-shadow: 0 4px 12px rgba(13, 110, 253, 0.45);
 }
 
-/* Download button */
 .download-btn {
   display: flex;
   align-items: center;
@@ -183,7 +176,7 @@
   transform: none;
 }
 
-/* Spinner */
+
 .spinner {
   width: 13px;
   height: 13px;
