@@ -54,9 +54,6 @@ const HowItWorks = () => {
               <div className="step-icon">{step.icon}</div>
               <h3 className="step-title">{step.title}</h3>
               <p className="step-description">{step.description}</p>
-              <span className="step-cta">
-                {step.id === 1 ? "Sign Up →" : "Explore →"}
-              </span>
             </div>
           ))}
         </div>
