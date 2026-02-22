@@ -123,7 +123,7 @@
   align-items: center;
   justify-content: center;
 
-  background: linear-gradient(135deg, #0d6efd, #0a58ca);
+ background: linear-gradient(135deg, #198754, #146c43);
   color: #ffffff;
 
   border: none;
@@ -314,10 +314,8 @@
   border-radius: 10px;
 }
 
-/* ── Responsive ── */
 @media (max-width: 768px) {
   .notes-grid {
-    /* single column, cards at 80% width, centred */
     grid-template-columns: 1fr;
     justify-items: center;
     gap: 1.1rem;
