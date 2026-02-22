@@ -1,8 +1,11 @@
 import React from "react";
 import { UserPlus, Upload, Download } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import "./HowItWorks.css";
 
 const HowItWorks = () => {
+  const navigate = useNavigate();
+
   const steps = [
     {
       id: 1,
@@ -10,6 +13,7 @@ const HowItWorks = () => {
       description:
         "Sign up in seconds to share your academic resources with friends.",
       icon: <UserPlus size={32} />,
+      link: "/register",
     },
     {
       id: 2,
@@ -17,6 +21,7 @@ const HowItWorks = () => {
       description:
         "Explore past exam papers organized by faculty, course, and year.",
       icon: <Upload size={32} />,
+      link: "/notes",
     },
     {
       id: 3,
@@ -24,6 +29,7 @@ const HowItWorks = () => {
       description:
         "Download papers instantly and prepare confidently for your exams.",
       icon: <Download size={32} />,
+      link: "/notes",
     },
   ];
 
@@ -37,10 +43,20 @@ const HowItWorks = () => {
 
         <div className="steps-grid">
           {steps.map((step) => (
-            <div key={step.id} className="step-card">
+            <div
+              key={step.id}
+              className="step-card"
+              onClick={() => navigate(step.link)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === "Enter" && navigate(step.link)}
+            >
               <div className="step-icon">{step.icon}</div>
               <h3 className="step-title">{step.title}</h3>
               <p className="step-description">{step.description}</p>
+              <span className="step-cta">
+                {step.id === 1 ? "Sign Up →" : "Explore →"}
+              </span>
             </div>
           ))}
         </div>
