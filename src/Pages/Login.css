@@ -271,7 +271,7 @@
   text-decoration: underline;
 }
 
-/* Email Login Button - Green Background */
+
 .email-login-btn {
   width: 100%;
   display: flex;
@@ -328,7 +328,6 @@
   to { transform: rotate(360deg); }
 }
 
-/* Register Section - Clean Separator */
 .register-section {
   text-align: center;
   padding-top: 1.5rem;
@@ -354,7 +353,6 @@
   text-decoration: underline;
 }
 
-/* Responsive Design - Keep consistent across all screens */
 @media (max-width: 768px) {
   .login-container {
     padding: 1.5rem;
@@ -368,10 +366,5 @@
   
   .login-card {
     padding: 2rem 1.5rem;
-  }
-
-  .link-modal {
-    padding: 1.5rem;
-    margin: 0.5rem;
   }
 }
