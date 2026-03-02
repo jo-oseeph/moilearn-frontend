@@ -60,7 +60,7 @@ const AdminDashboard = () => {
       value: stats?.totalUsers || 0,
       icon: <Users size={28} color="#1d4ed8" />,
       bg: "card-blue",
-      link: null, // no redirect
+      link: null, 
     },
     {
       title: "Total Past Papers",
@@ -70,7 +70,7 @@ const AdminDashboard = () => {
       link: "/admin/manage-notes?status=all",
     },
     {
-      title: "Pending Notes",
+      title: "Pending Past Papers",
       value: stats?.pendingNotes || 0,
       icon: <Clock size={28} color="#d97706" />,
       bg: "card-yellow",
