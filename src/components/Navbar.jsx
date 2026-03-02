@@ -104,14 +104,6 @@ const Navbar = () => {
           >
             Past Papers
           </NavLink>
-         
-          {/* <NavLink 
-            to="/dashboard" 
-            onClick={handleLinkClick}
-            className={({ isActive }) => isActive ? "active" : ""}
-          >
-            Dashboard
-          </NavLink> */}
           
           {!isLoggedIn ? (
             <div className="auth-buttons">
@@ -144,13 +136,6 @@ const Navbar = () => {
 >
   My Dashboard
 </Link>
-
-                  <Link 
-                    to="/settings" 
-                    onClick={handleLinkClick}
-                  >
-                    Settings
-                  </Link>
                   <button onClick={handleLogout}>
                     Logout
                   </button>
