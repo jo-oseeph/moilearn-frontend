@@ -77,14 +77,14 @@ const AdminDashboard = () => {
       link: "/admin/manage-notes?status=pending",
     },
     {
-      title: "Approved Notes",
+      title: "Approved Past Papers",
       value: stats?.approvedNotes || 0,
       icon: <CheckCircle size={28} color="#16a34a" />,
       bg: "card-green",
       link: "/admin/manage-notes?status=approved",
     },
     {
-      title: "Rejected Notes",
+      title: "Rejected Past Papers",
       value: stats?.rejectedNotes || 0,
       icon: <XCircle size={28} color="#dc2626" />,
       bg: "card-red",
@@ -93,7 +93,7 @@ const AdminDashboard = () => {
   ];
 
   const handleCardClick = (link) => {
-    if (link) navigate(link); // navigate only if link exists
+    if (link) navigate(link); 
   };
 
   return (

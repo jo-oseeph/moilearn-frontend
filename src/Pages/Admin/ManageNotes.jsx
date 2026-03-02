@@ -167,7 +167,7 @@ const ManageNotes = () => {
       {rejecting && (
         <div className="modal">
           <div className="modal-content">
-            <h3>Reject Note</h3>
+            <h3>Reject</h3>
             <textarea
               placeholder="Reason for rejection"
               value={reason}
@@ -191,7 +191,7 @@ const ManageNotes = () => {
           <div className="modal-content">
             <h3>Delete Note</h3>
             <p>
-              This will permanently delete the file and record.
+              This will permanently delete the file.
               <br />
               This action cannot be undone.
             </p>
