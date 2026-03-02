@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Download, FileText, GraduationCap } from 'lucide-react';
 import './stats.css';
+import API_BASE_URL from "../config/api.js";
 
 const StatsSection = () => {
   const [stats, setStats] = useState({
@@ -12,24 +13,26 @@ const StatsSection = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchStats = async () => {
-      try {
-        setTimeout(() => {
-          setStats({
-            notesCount: 16,
-            pastPapersCount: 8,
-            facultiesCount: 7,
-          });
-          setIsLoading(false);
-        }, 1000);
-      } catch (error) {
-        console.error('Error fetching stats:', error);
-        setIsLoading(false);
-      }
-    };
+  const fetchStats = async () => {
+    try {
+     const res = await fetch(
+  `${API_BASE_URL}/api/public-stats`
+);
 
-    fetchStats();
-  }, []);
+      if (!res.ok) throw new Error("Failed to fetch stats");
+
+      const data = await res.json();
+      setStats(data);
+      setIsLoading(false);
+
+    } catch (error) {
+      console.error(error);
+      setIsLoading(false);
+    }
+  };
+
+  fetchStats();
+}, []);
 
   const animateCount = (targetCount) => {
     if (isLoading) return 0;
