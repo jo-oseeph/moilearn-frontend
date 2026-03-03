@@ -49,7 +49,6 @@ const AuthService = {
     return true;
   },
 
-  // Get role from stored user
   getRole() {
     const user = this.getUser();
     return user?.role || "user";
