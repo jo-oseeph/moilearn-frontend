@@ -1,118 +1,351 @@
-/* UploadNotePage.css */
+/* UploadNotesPage.css */
 
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+/* ── Reset & base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ── Page wrapper ── */
 .upload-container {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  font-family: "Poppins", sans-serif;
+  max-width: 780px;
+  margin: 48px auto;
+  padding: 40px 44px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.06),
+    0 8px 24px rgba(0, 0, 0, 0.10),
+    0 32px 56px rgba(0, 0, 0, 0.10);
+  font-family: 'DM Sans', sans-serif;
 }
 
+/* ── Title ── */
 .page-title {
   text-align: center;
-  margin-bottom: 20px;
-  color: #0b2153;
-  font-size: 24px;
+  margin-bottom: 32px;
+  color: #111827;
+  font-size: 20px;
   font-weight: 600;
+  letter-spacing: -0.3px;
 }
 
+.page-title span {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: #16a34a;
+  border-radius: 50%;
+  margin-left: 6px;
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
+}
+
+/* ── Form layout ── */
 .upload-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
-.form-row {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
+/* Two-column grid row */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
 }
 
-.form-group {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+/* Three-column grid for year/semester/code */
+.form-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.4fr;
+  gap: 14px;
 }
 
-.form-group label {
-  font-weight: 500;
-  margin-bottom: 5px;
-}
-
-.form-group input,
-.form-group select {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-}
-
-.file-dropzone {
-  border: 2px dashed #f94023;
-  padding: 30px;
-  text-align: center;
+/* ── Select & Input shared styles ── */
+.upload-form select,
+.upload-form input[type="text"],
+.upload-form input[type="number"] {
+  width: 100%;
+  padding: 10px 13px;
+  border: 1.5px solid #e5e7eb;
   border-radius: 8px;
-  background: #fff8f7;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13.5px;
+  color: #111827;
+  background: #fafafa;
+  outline: none;
+  transition: border-color 0.18s, box-shadow 0.18s, background 0.18s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+/* Custom arrow for selects */
+.select-wrap {
+  position: relative;
+}
+
+.select-wrap::after {
+  content: '';
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 4.5px solid transparent;
+  border-right: 4.5px solid transparent;
+  border-top: 5.5px solid #6b7280;
+  pointer-events: none;
+}
+
+.upload-form select {
+  padding-right: 32px;
   cursor: pointer;
-  transition: background 0.3s;
+}
+
+.upload-form select:focus,
+.upload-form input[type="text"]:focus,
+.upload-form input[type="number"]:focus {
+  border-color: #16a34a;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.12);
+}
+
+.upload-form select:hover:not(:focus),
+.upload-form input[type="text"]:hover:not(:focus),
+.upload-form input[type="number"]:hover:not(:focus) {
+  border-color: #9ca3af;
+  background: #fff;
+}
+
+/* Placeholder color */
+.upload-form select option[value=""] { color: #9ca3af; }
+.upload-form input::placeholder { color: #9ca3af; }
+
+/* Remove number input spinner arrows */
+.upload-form input[type="number"]::-webkit-inner-spin-button,
+.upload-form input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.upload-form input[type="number"] { appearance: textfield; -moz-appearance: textfield; }
+
+/* ── Drop zone ── */
+.file-dropzone {
+  position: relative;
+  border: 2px dashed #d1d5db;
+  padding: 22px 20px;
+  text-align: center;
+  border-radius: 10px;
+  background: #f9fafb;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
 }
 
 .file-dropzone:hover {
-  background: #ffeceb;
+  border-color: #16a34a;
+  background: #f0fdf4;
 }
 
-.file-preview {
-  background: #f9f9f9;
-  padding: 15px;
-  border-radius: 6px;
-  border: 1px solid #ddd;
+.file-dropzone p {
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.file-dropzone p:first-child {
   font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 2px;
 }
 
+.dropzone-icon {
+  display: block;
+  margin: 0 auto 10px;
+  width: 36px;
+  height: 36px;
+  color: #16a34a;
+}
+
+/* Hide default file input but keep it clickable */
+.file-dropzone input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── File list ── */
+.file-preview {
+  background: #f9fafb;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1.5px solid #e5e7eb;
+}
+
+.file-preview h4 {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: #6b7280;
+  margin-bottom: 8px;
+}
+
+.file-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 13px;
+  color: #374151;
+}
+
+.file-item:last-child { border-bottom: none; }
+
+.file-item span {
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: #4b5563;
+  max-width: 80%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-item button {
+  background: transparent;
+  color: #ef4444;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  border: 1.5px solid #fca5a5;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  min-width: auto;
+}
+
+.file-item button:hover {
+  background: #ef4444;
+  color: #fff;
+  border-color: #ef4444;
+}
+
+/* ── Progress bar ── */
 .progress-bar {
-  height: 8px;
-  background: #eee;
-  border-radius: 6px;
+  height: 5px;
+  background: #e5e7eb;
+  border-radius: 99px;
   overflow: hidden;
 }
 
 .progress-fill {
   height: 100%;
-  background: #f94023;
-  transition: width 0.3s ease-in-out;
+  background: linear-gradient(90deg, #16a34a, #22c55e);
+  border-radius: 99px;
+  transition: width 0.35s ease;
+}
+
+/* ── Feedback messages ── */
+.error-message,
+.success-message {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 500;
+  line-height: 1.4;
 }
 
 .error-message {
-  color: red;
-  font-size: 14px;
-  font-weight: 500;
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1.5px solid #fca5a5;
+}
+
+.error-message::before {
+  content: '✕';
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background: #ef4444;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 700;
+  flex-shrink: 0;
 }
 
 .success-message {
-  color: green;
-  font-size: 14px;
-  font-weight: 500;
+  background: #f0fdf4;
+  color: #15803d;
+  border: 1.5px solid #86efac;
 }
 
-button {
-  background: #f94023;
-  color: white;
+.success-message::before {
+  content: '✓';
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  background: #16a34a;
+  color: #fff;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ── Submit button ── */
+.submit-btn {
+  width: 100%;
   padding: 12px;
+  background: #16a34a;
+  color: #fff;
   border: none;
-  border-radius: 6px;
-  font-size: 16px;
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14.5px;
   font-weight: 600;
+  letter-spacing: 0.1px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.18s, box-shadow 0.18s, transform 0.1s;
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.30);
 }
 
-button:disabled {
-  background: #ccc;
+.submit-btn:hover:not(:disabled) {
+  background: #15803d;
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.40);
+  transform: translateY(-1px);
+}
+
+.submit-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.submit-btn:disabled {
+  background: #9ca3af;
+  box-shadow: none;
   cursor: not-allowed;
 }
 
-button:hover:not(:disabled) {
-  background: #d7301c;
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  .upload-container {
+    margin: 16px;
+    padding: 24px 20px;
+  }
+
+  .form-grid,
+  .form-grid-3 {
+    grid-template-columns: 1fr;
+  }
 }
