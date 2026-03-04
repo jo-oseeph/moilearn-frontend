@@ -42,7 +42,8 @@ const NotesPage = () => {
       const matchesSearch =
         note.courseCode.toLowerCase().includes(query) ||
         note.courseTitle.toLowerCase().includes(query) ||
-        note.school.toLowerCase().includes(query);
+        note.school.toLowerCase().includes(query)||
+         String(note.examYear).includes(query);
 
       const matchesCategory =
         category === "all" || note.category === category;
@@ -122,7 +123,7 @@ const NotesPage = () => {
         <div className="notes-filters">
           <input
             type="text"
-            placeholder="Search by course code, title, or school"
+            placeholder="Search by course code, year, title, or school"
             disabled
           />
         </div>
@@ -142,7 +143,7 @@ const NotesPage = () => {
       <div className="notes-filters">
         <input
           type="text"
-          placeholder="Search by course code, title, or school"
+          placeholder="Search by course code, year, title, or school"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -161,9 +162,9 @@ const NotesPage = () => {
               <h3>{note.courseTitle}</h3>
               <p className="course-code">{note.courseCode}</p>
 
-              <p className="meta">
-                {note.school} · Year {note.year} · Sem {note.semester}
-              </p>
+             <p className="meta">
+   {note.school} · Year {note.year} · Sem {note.semester} · Exam {note.examYear}
+</p>
 
               <div className="card-actions">
                 <div className="action-buttons">
