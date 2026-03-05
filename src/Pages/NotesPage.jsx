@@ -119,7 +119,7 @@ const NotesPage = () => {
   if (loading) {
     return (
       <div className="notes-page">
-        <h1 className="notes-title">Available Notes</h1>
+        <h1 className="notes-title">Available Past Papers</h1>
         <div className="notes-filters">
           <input
             type="text"
