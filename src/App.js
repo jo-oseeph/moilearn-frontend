@@ -4,6 +4,7 @@ import { AuthProvider } from "./context/AuthContext";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ScrollToTop from "./components/ScrollToTop";
 
 // Public pages
 import { HomePage } from "./Pages/HomePage";
@@ -39,6 +40,7 @@ function LayoutWrapper({ children }) {
 function App() {
   return (
     <Router>
+       <ScrollToTop />
       <AuthProvider>
         <div className="App">
           <LayoutWrapper>
