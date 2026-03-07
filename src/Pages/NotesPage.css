@@ -91,13 +91,47 @@
   font-size: 0.9rem;
   letter-spacing: 0.03em;
 }
+/* Chips */
 
-.meta {
-  font-size: 0.78rem;
-  color: #8a9ab5;
+/* Chips (metadata badges) */
+
+.note-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
   margin-bottom: 1rem;
-  text-align: center;
+}
+
+.chip {
+  font-size: 0.72rem;
+  padding: 4px 9px;
+  border-radius: 20px;
+  font-weight: 600;
   letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+/* Individual chip colors */
+
+.chip.school {
+  background: #eef4ff;
+  color: #0d6efd;
+}
+
+.chip.year {
+  background: #fff3bf;
+  color: #e67700;
+}
+
+.chip.semester {
+  background: #e6fcf5;
+  color: #0ca678;
+}
+
+.chip.exam {
+  background: #f3f0ff;
+  color: #6741d9;
 }
 
 /* Actions — three columns: [preview icon] [download btn] [count icon] */

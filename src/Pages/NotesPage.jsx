@@ -162,9 +162,12 @@ const NotesPage = () => {
               <h3>{note.courseTitle}</h3>
               <p className="course-code">{note.courseCode}</p>
 
-             <p className="meta">
-   {note.school} · Year {note.year} · Sem {note.semester} · Exam {note.examYear}
-</p>
+             <div className="note-chips">
+  <span className="chip school">{note.school}</span>
+  <span className="chip year">Year {note.year}</span>
+  <span className="chip semester">Sem {note.semester}</span>
+  <span className="chip exam">Exam {note.examYear}</span>
+</div>
 
               <div className="card-actions">
                 <div className="action-buttons">
