@@ -116,7 +116,6 @@ const StatsSection = () => {
           />
         ))}
       </div>
-      <p className="swipe-hint">swipe to see more</p>
     </section>
   );
 };
