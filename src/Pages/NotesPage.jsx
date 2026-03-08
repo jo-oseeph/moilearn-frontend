@@ -86,9 +86,12 @@ const NotesPage = () => {
       document.body.appendChild(a);
       a.click();
       
-      // Cleanup
+      // Give browser time to actually start download
+    setTimeout(() => {
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
+      setDownloadingId(null);
+    }, 1200);
 
     } catch (err) {
       console.error("Download failed:", err);
