@@ -87,7 +87,7 @@ const NotesPage = () => {
       a.click();
       
       // Give browser time to actually start download
-    setTimeout(() => {
+    setTimeout(() => { 
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
       setDownloadingId(null);
