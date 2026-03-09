@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import {  Lock, LogOut, Edit2, Eye, EyeOff, ChevronDown, ChevronUp } from "lucide-react";
+import { Lock, LogOut, Edit2, Eye, EyeOff, ChevronDown, ChevronUp } from "lucide-react";
 import "./ProfilePage.css";
 import API_BASE_URL from "../config/api";
 
@@ -11,11 +11,9 @@ const ProfilePage = () => {
 
   const [showPasswordSection, setShowPasswordSection] = useState(false);
   const [showEditUsername, setShowEditUsername] = useState(false);
-  const [showEditEmail, setShowEditEmail] = useState(false);
 
   const [formData, setFormData] = useState({
     username: "",
-    email: "",
     currentPassword: "",
     newPassword: "",
     confirmPassword: "",
@@ -29,37 +27,22 @@ const ProfilePage = () => {
   const [logoutLoading, setLogoutLoading] = useState(false);
   const [message, setMessage] = useState({ type: "", text: "" });
 
-  // Helper function to get token
-  const getToken = () => {
-    return localStorage.getItem('moilearn_token') || sessionStorage.getItem('moilearn_token');
-  };
+  const getToken = () =>
+    localStorage.getItem("moilearn_token") || sessionStorage.getItem("moilearn_token");
 
-  // Helper function to get headers with auth
-  const getAuthHeaders = () => {
-    const token = getToken();
-    return {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`
-    };
-  };
+  const getAuthHeaders = () => ({
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${getToken()}`,
+  });
 
   useEffect(() => {
     if (user) {
-      setFormData({
-        username: user.username || "",
-        email: user.email || "",
-        currentPassword: "",
-        newPassword: "",
-        confirmPassword: "",
-      });
+      setFormData((prev) => ({ ...prev, username: user.username || "" }));
     }
   }, [user]);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     if (message.text) setMessage({ type: "", text: "" });
   };
 
@@ -80,46 +63,11 @@ const ProfilePage = () => {
       });
 
       const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.message || "Failed to update username");
-      }
+      if (!res.ok) throw new Error(data.message || "Failed to update username");
 
       updateUser(data.user);
       setMessage({ type: "success", text: "Username updated successfully" });
       setShowEditUsername(false);
-    } catch (err) {
-      setMessage({ type: "error", text: err.message });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleUpdateEmail = async () => {
-    if (!formData.email || formData.email === user.email) {
-      setShowEditEmail(false);
-      return;
-    }
-
-    setLoading(true);
-    setMessage({ type: "", text: "" });
-
-    try {
-      const res = await fetch(`${API_BASE_URL}/api/user/profile`, {
-        method: "PUT",
-        headers: getAuthHeaders(),
-        body: JSON.stringify({ username: user.username, email: formData.email }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.message || "Failed to update email");
-      }
-
-      updateUser(data.user);
-      setMessage({ type: "success", text: "Email updated successfully" });
-      setShowEditEmail(false);
     } catch (err) {
       setMessage({ type: "error", text: err.message });
     } finally {
@@ -132,12 +80,10 @@ const ProfilePage = () => {
       setMessage({ type: "error", text: "All password fields are required" });
       return;
     }
-
     if (formData.newPassword !== formData.confirmPassword) {
       setMessage({ type: "error", text: "New passwords do not match" });
       return;
     }
-
     if (formData.newPassword.length < 6) {
       setMessage({ type: "error", text: "Password must be at least 6 characters" });
       return;
@@ -159,18 +105,15 @@ const ProfilePage = () => {
       });
 
       const data = await res.json();
-
-      if (!res.ok) {
-        throw new Error(data.message || "Failed to change password");
-      }
+      if (!res.ok) throw new Error(data.message || "Failed to change password");
 
       setMessage({ type: "success", text: "Password changed successfully" });
-      setFormData({
-        ...formData,
+      setFormData((prev) => ({
+        ...prev,
         currentPassword: "",
         newPassword: "",
         confirmPassword: "",
-      });
+      }));
       setShowPasswordSection(false);
     } catch (err) {
       setMessage({ type: "error", text: err.message });
@@ -179,47 +122,42 @@ const ProfilePage = () => {
     }
   };
 
-  const handleLogout = async () => {
+  const handleLogout = () => {
     setLogoutLoading(true);
-    setMessage({ type: "info", text: "Logging out..." });
-
-    // Simulate logout process
     setTimeout(() => {
       logout();
-      setMessage({ type: "success", text: "Logged out successfully" });
-      setTimeout(() => {
-        navigate("/");
-      }, 500);
-    }, 1000);
+      navigate("/");
+    }, 800);
   };
 
   return (
     <div className="profile-page">
       <div className="profile-container">
-        {/* Profile Avatar and Info */}
+
+        {/* Header */}
         <div className="profile-header">
           <div className="profile-avatar-large">
             {user?.username?.charAt(0).toUpperCase() || "U"}
           </div>
-          <h1 className="profile-name">{user?.username || "User"}</h1>
-          <p className="profile-email">{user?.email}</p>
-          <span className="profile-role">{user?.role?.toUpperCase() || "USER"}</span>
+          <div className="profile-header-info">
+            <h1 className="profile-name">{user?.username || "User"}</h1>
+            <p className="profile-email">{user?.email}</p>
+            <span className="profile-role">{user?.role?.toUpperCase() || "USER"}</span>
+          </div>
         </div>
 
-        {/* Messages */}
+        {/* Message */}
         {message.text && (
-          <div className={`message ${message.type}`}>
-            {message.text}
-          </div>
+          <div className={`message ${message.type}`}>{message.text}</div>
         )}
 
         {/* Account Details */}
         <div className="account-section">
-          <h3>ACCOUNT DETAILS</h3>
+          <h3>Account Details</h3>
 
-          {/* Username Field */}
+          {/* Username */}
           <div className="detail-field">
-            <label>USERNAME</label>
+            <label>Username</label>
             {showEditUsername ? (
               <div className="edit-field">
                 <input
@@ -230,17 +168,13 @@ const ProfilePage = () => {
                   autoFocus
                 />
                 <div className="edit-actions">
-                  <button
-                    onClick={handleUpdateUsername}
-                    disabled={loading}
-                    className="btn-save-small"
-                  >
+                  <button onClick={handleUpdateUsername} disabled={loading} className="btn-save-small">
                     {loading ? "Saving..." : "Save"}
                   </button>
                   <button
                     onClick={() => {
                       setShowEditUsername(false);
-                      setFormData({ ...formData, username: user.username });
+                      setFormData((prev) => ({ ...prev, username: user.username }));
                     }}
                     className="btn-cancel-small"
                   >
@@ -251,171 +185,78 @@ const ProfilePage = () => {
             ) : (
               <div className="field-display">
                 <span>{user?.username}</span>
-                <button
-                  onClick={() => setShowEditUsername(true)}
-                  className="btn-edit"
-                >
-                  <Edit2 size={16} />
+                <button onClick={() => setShowEditUsername(true)} className="btn-edit">
+                  <Edit2 size={15} />
                 </button>
               </div>
             )}
           </div>
 
-          {/* Email Field */}
+          {/* Email — read only */}
           <div className="detail-field">
-            <label>EMAIL</label>
-            {showEditEmail ? (
-              <div className="edit-field">
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  autoFocus
-                />
-                <div className="edit-actions">
-                  <button
-                    onClick={handleUpdateEmail}
-                    disabled={loading}
-                    className="btn-save-small"
-                  >
-                    {loading ? "Saving..." : "Save"}
-                  </button>
-                  <button
-                    onClick={() => {
-                      setShowEditEmail(false);
-                      setFormData({ ...formData, email: user.email });
-                    }}
-                    className="btn-cancel-small"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <div className="field-display">
-                <span>{user?.email}</span>
-                <button
-                  onClick={() => setShowEditEmail(true)}
-                  className="btn-edit"
-                >
-                  <Edit2 size={16} />
-                </button>
-              </div>
-            )}
+            <label>Email</label>
+            <div className="field-display-static">
+              <span>{user?.email}</span>
+            </div>
           </div>
 
-          {/* Access Level */}
+          {/* Role */}
           <div className="detail-field">
-            <label>ACCESS LEVEL</label>
+            <label>Access Level</label>
             <div className="field-display-static">
               <span>{user?.role?.toUpperCase() || "USER"}</span>
             </div>
           </div>
         </div>
 
-        {/* Change Password Section */}
+        {/* Change Password */}
         <div className="password-toggle-section">
           <button
             className="btn-toggle-password"
             onClick={() => setShowPasswordSection(!showPasswordSection)}
           >
-            <Lock size={18} />
+            <Lock size={16} />
             <span>Change Password</span>
-            {showPasswordSection ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+            {showPasswordSection ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
           </button>
 
           {showPasswordSection && (
             <div className="password-form">
-              <div className="form-group-compact">
-                <label>Current Password</label>
-                <div className="password-input-wrapper">
-                  <input
-                    type={showCurrentPassword ? "text" : "password"}
-                    name="currentPassword"
-                    value={formData.currentPassword}
-                    onChange={handleChange}
-                    placeholder="Enter current password"
-                  />
-                  <button
-                    type="button"
-                    className="toggle-password"
-                    onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                  >
-                    {showCurrentPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                  </button>
+              {[
+                { label: "Current Password", name: "currentPassword", show: showCurrentPassword, toggle: () => setShowCurrentPassword(!showCurrentPassword) },
+                { label: "New Password",     name: "newPassword",     show: showNewPassword,     toggle: () => setShowNewPassword(!showNewPassword) },
+                { label: "Confirm Password", name: "confirmPassword", show: showConfirmPassword, toggle: () => setShowConfirmPassword(!showConfirmPassword) },
+              ].map(({ label, name, show, toggle }) => (
+                <div className="form-group-compact" key={name}>
+                  <label>{label}</label>
+                  <div className="password-input-wrapper">
+                    <input
+                      type={show ? "text" : "password"}
+                      name={name}
+                      value={formData[name]}
+                      onChange={handleChange}
+                      placeholder={`Enter ${label.toLowerCase()}`}
+                    />
+                    <button type="button" className="toggle-password" onClick={toggle}>
+                      {show ? <EyeOff size={15} /> : <Eye size={15} />}
+                    </button>
+                  </div>
                 </div>
-              </div>
+              ))}
 
-              <div className="form-group-compact">
-                <label>New Password</label>
-                <div className="password-input-wrapper">
-                  <input
-                    type={showNewPassword ? "text" : "password"}
-                    name="newPassword"
-                    value={formData.newPassword}
-                    onChange={handleChange}
-                    placeholder="Enter new password"
-                  />
-                  <button
-                    type="button"
-                    className="toggle-password"
-                    onClick={() => setShowNewPassword(!showNewPassword)}
-                  >
-                    {showNewPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                  </button>
-                </div>
-              </div>
-
-              <div className="form-group-compact">
-                <label>Confirm New Password</label>
-                <div className="password-input-wrapper">
-                  <input
-                    type={showConfirmPassword ? "text" : "password"}
-                    name="confirmPassword"
-                    value={formData.confirmPassword}
-                    onChange={handleChange}
-                    placeholder="Confirm new password"
-                  />
-                  <button
-                    type="button"
-                    className="toggle-password"
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  >
-                    {showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                  </button>
-                </div>
-              </div>
-
-              <button
-                onClick={handleChangePassword}
-                disabled={loading}
-                className="btn-change-password"
-              >
-                {loading ? "Changing..." : "Update Password"}
+              <button onClick={handleChangePassword} disabled={loading} className="btn-change-password">
+                {loading ? "Updating..." : "Update Password"}
               </button>
             </div>
           )}
         </div>
 
-        {/* Logout Button */}
-        <button
-          className="btn-logout"
-          onClick={handleLogout}
-          disabled={logoutLoading}
-        >
-          {logoutLoading ? (
-            <>
-              <div className="spinner-small"></div>
-              <span>Logging out...</span>
-            </>
-          ) : (
-            <>
-              <LogOut size={18} />
-              <span>LOG OUT</span>
-            </>
-          )}
+        {/* Logout */}
+        <button className="logout-link" onClick={handleLogout} disabled={logoutLoading}>
+          <LogOut size={14} />
+          <span>{logoutLoading ? "Logging out..." : "Log out"}</span>
         </button>
+
       </div>
     </div>
   );
