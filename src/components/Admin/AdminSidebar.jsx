@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, LayoutDashboard, FileText, User, LogOut } from "lucide-react";
+import { Home, LayoutDashboard, FileText, User, } from "lucide-react";
 import "./AdminSidebar.css";
 
 function Sidebar({ isOpen }) {
@@ -48,14 +48,6 @@ function Sidebar({ isOpen }) {
           </li>
         </ul>
       </nav>
-
-      {/* Bottom Logout */}
-      <div className="sidebar-bottom">
-        <Link to="/logout" className="logout-link">
-          <LogOut className="sidebar-icon" />
-          <span className="link-text">Logout</span>
-        </Link>
-      </div>
 
     </aside>
   );
