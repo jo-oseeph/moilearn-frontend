@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { Eye, EyeOff, Mail } from "lucide-react";
+import { Eye, EyeOff, } from "lucide-react";
 import API_BASE_URL from "../config/api";
 import "./Login.css";
 
@@ -182,7 +182,7 @@ const Login = () => {
               </>
             ) : (
               <>
-                <Mail size={20} />
+              
                 Sign In
               </>
             )}
