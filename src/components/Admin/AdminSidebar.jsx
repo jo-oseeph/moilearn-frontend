@@ -21,7 +21,7 @@ function Sidebar({ isOpen }) {
           <li className={location.pathname === "/admin/dashboard" ? "active" : ""}>
             <Link to="/admin/dashboard">
               <LayoutDashboard className="sidebar-icon" />
-              <span className="link-text">Overview Dashboard</span>
+              <span className="link-text">Overview</span>
             </Link>
           </li>
 

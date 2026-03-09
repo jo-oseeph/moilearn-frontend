@@ -86,3 +86,18 @@
 .logout-link:hover {
   color: #dc2626;
 }
+
+/* Sidebar icons */
+.sidebar-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+/* On large screens increase slightly */
+@media (min-width: 1200px) {
+  .sidebar-icon {
+    width: 24px;
+    height: 24px;
+  }
+}
