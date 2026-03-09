@@ -81,7 +81,7 @@ const Dashboard = () => {
         <header className="dashboard-header">
           <div className="header-inner">
             <h1 className="welcome-title">
-              Welcome back, <span className="username-highlight">{user?.username || "User"} 👋</span>
+              Welcome back, <span className="username-highlight">{user?.username || "User"} </span>
             </h1>
             <p className="welcome-subtitle">Here's what's happening with your notes today.</p>
           </div>

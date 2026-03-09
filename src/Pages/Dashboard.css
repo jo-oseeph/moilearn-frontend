@@ -92,7 +92,6 @@
 .stat-card.uploads   .stat-icon { background: #eff6ff; color: #3b82f6; }
 .stat-card.downloads .stat-icon { background: #ecfdf5; color: #10b981; }
 
-.stat-text {}
 
 .stat-number {
   font-size: 1.6rem;
