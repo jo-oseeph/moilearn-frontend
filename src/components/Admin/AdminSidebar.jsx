@@ -7,7 +7,15 @@ function Sidebar({ isOpen }) {
 
   return (
     <aside className={`sidebar ${isOpen ? "open" : ""}`}>
-      <h2 className="sidebar-title">Admin</h2>
+
+      {/* Admin profile section */}
+      <div className="sidebar-profile">
+        <div className="avatar-circle">A</div>
+        <div className="admin-info">
+          <span className="admin-name">Admin</span>
+          <span className="admin-role">Administrator</span>
+        </div>
+      </div>
 
       <nav>
         <ul>
@@ -41,13 +49,14 @@ function Sidebar({ isOpen }) {
         </ul>
       </nav>
 
-      {/* Bottom section */}
+      {/* Bottom Logout */}
       <div className="sidebar-bottom">
         <Link to="/logout" className="logout-link">
           <LogOut className="sidebar-icon" />
           <span className="link-text">Logout</span>
         </Link>
       </div>
+
     </aside>
   );
 }
