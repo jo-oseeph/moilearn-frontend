@@ -1,55 +1,69 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, LayoutDashboard, FileText, User, } from "lucide-react";
+import { Home, LayoutDashboard, FileText, User } from "lucide-react";
 import "./AdminSidebar.css";
 
-function Sidebar({ isOpen }) {
+const navLinks = [
+  { to: "/",                    icon: Home,            label: "Home"         },
+  { to: "/admin/dashboard",     icon: LayoutDashboard, label: "Overview"     },
+  { to: "/admin/manage-notes",  icon: FileText,        label: "Notes"        },
+  { to: "/profile",             icon: User,            label: "Profile"      },
+];
+
+function Sidebar() {
   const location = useLocation();
+  const isActive = (path) => location.pathname === path;
 
   return (
-    <aside className={`sidebar ${isOpen ? "open" : ""}`}>
+    <>
+      {/* ── Desktop Sidebar ── */}
+      <aside className="sidebar">
 
-      {/* Admin profile section */}
-      <div className="sidebar-profile">
-        <div className="avatar-circle">A</div>
-        <div className="admin-info">
-          <span className="admin-name">Admin</span>
-          <span className="admin-role">Administrator</span>
+        {/* Brand */}
+        <div className="sidebar-brand">
+          <div className="brand-dot">M</div>
+          <span className="brand-name">Moilearn</span>
         </div>
-      </div>
 
-      <nav>
-        <ul>
-          <li className={location.pathname === "/" ? "active" : ""}>
-            <Link to="/">
-              <Home className="sidebar-icon" />
-              <span className="link-text">Home</span>
-            </Link>
-          </li>
+        {/* Profile */}
+        <div className="sidebar-profile">
+          <div className="avatar-circle">A</div>
+          <div className="admin-info">
+            <span className="admin-name">Admin</span>
+            <span className="admin-role">Administrator</span>
+          </div>
+        </div>
 
-          <li className={location.pathname === "/admin/dashboard" ? "active" : ""}>
-            <Link to="/admin/dashboard">
-              <LayoutDashboard className="sidebar-icon" />
-              <span className="link-text">Overview</span>
-            </Link>
-          </li>
+        {/* Nav */}
+        <p className="nav-label">Menu</p>
+        <nav>
+          <ul>
+            {navLinks.map(({ to, icon: Icon, label }) => (
+              <li key={to} className={isActive(to) ? "active" : ""}>
+                <Link to={to}>
+                  <Icon className="sidebar-icon" />
+                  <span className="link-text">{label}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
-          <li className={location.pathname === "/admin/manage-notes" ? "active" : ""}>
-            <Link to="/admin/manage-notes">
-              <FileText className="sidebar-icon" />
-              <span className="link-text">Manage Notes</span>
-            </Link>
-          </li>
+      </aside>
 
-          <li className={location.pathname === "/profile" ? "active" : ""}>
-            <Link to="/profile">
-              <User className="sidebar-icon" />
-              <span className="link-text">Profile</span>
-            </Link>
-          </li>
-        </ul>
+      {/* ── Mobile Bottom Nav ── */}
+      <nav className="bottom-nav">
+        {navLinks.map(({ to, icon: Icon, label }) => (
+          <Link
+            key={to}
+            to={to}
+            className={`bottom-nav-item ${isActive(to) ? "active" : ""}`}
+          >
+            <Icon />
+            <span>{label}</span>
+          </Link>
+        ))}
       </nav>
-
-    </aside>
+    </>
   );
 }
 
