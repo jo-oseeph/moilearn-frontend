@@ -1,21 +1,218 @@
-/* Topbar.css */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+/* ═══════════════════════════════════════
+   TOPBAR
+═══════════════════════════════════════ */
 .topbar {
+  height: 60px;
+  background: #ffffff;
+  border-bottom: 1px solid #e8edf5;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background-color: #1dd1a1; /* green */
-  padding: 10px 20px;
-  color: white;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.05);
 }
 
-/* Hamburger hidden on large screens */
-.hamburger {
-  font-size: 24px;
+/* ── Left: Page Title ── */
+.topbar-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.topbar-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.topbar-breadcrumb {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  font-weight: 500;
+  margin-top: 1px;
+}
+
+/* ── Right: User info ── */
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;
+}
+
+/* Date pill */
+.topbar-date {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: #94a3b8;
+  background: #f8fafc;
+  border: 1px solid #e8edf5;
+  border-radius: 20px;
+  padding: 0.3rem 0.85rem;
+  white-space: nowrap;
+}
+
+/* User button */
+.topbar-user {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #f8fafc;
+  border: 1px solid #e8edf5;
+  border-radius: 30px;
+  padding: 0.3rem 0.75rem 0.3rem 0.35rem;
   cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease;
+  position: relative;
 }
 
-@media (min-width: 768px) {
-  .hamburger {
+.topbar-user:hover {
+  background: #f0f4f8;
+  border-color: #cbd5e1;
+}
+
+.topbar-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #22c55e, #3b82f6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.topbar-username {
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: #0f172a;
+  white-space: nowrap;
+}
+
+.topbar-chevron {
+  color: #94a3b8;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.topbar-chevron.open {
+  transform: rotate(180deg);
+}
+
+/* ── Dropdown ── */
+.topbar-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: #ffffff;
+  border: 1px solid #e8edf5;
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.1), 0 2px 8px rgba(0,0,0,0.06);
+  min-width: 180px;
+  overflow: hidden;
+  animation: dropIn 0.18s ease;
+  z-index: 300;
+}
+
+@keyframes dropIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-header {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.dropdown-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #0f172a;
+  display: block;
+}
+
+.dropdown-role {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  margin-top: 1px;
+  display: block;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.65rem 1rem;
+  font-size: 0.825rem;
+  font-weight: 500;
+  color: #374151;
+  text-decoration: none;
+  transition: background 0.15s ease;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+.dropdown-item:hover {
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+.dropdown-item.danger {
+  color: #ef4444;
+}
+
+.dropdown-item.danger:hover {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: #f1f5f9;
+  margin: 0;
+}
+
+/* ── Mobile ── */
+@media (max-width: 767px) {
+  .topbar {
+    padding: 0 1rem;
+  }
+
+  .topbar-date {
+    display: none;
+  }
+
+  .topbar-username {
+    display: none;
+  }
+
+  .topbar-user {
+    padding: 0.25rem;
+    border-radius: 50%;
+    background: transparent;
+    border-color: transparent;
+  }
+
+  .topbar-user:hover {
+    background: #f0f4f8;
+    border-color: #e8edf5;
+  }
+
+  .topbar-chevron {
     display: none;
   }
 }
