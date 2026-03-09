@@ -2,7 +2,6 @@
 import React from "react";
 import Sidebar from "../components/Admin/AdminSidebar";
 import "./AdminLayout.css";
-
 function AdminLayout({ children }) {
   return (
     <div className="admin-layout">
@@ -12,5 +11,4 @@ function AdminLayout({ children }) {
     </div>
   );
 }
-
 export default AdminLayout;
