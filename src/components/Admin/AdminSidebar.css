@@ -66,3 +66,23 @@
     gap: 0;
   }
 }
+
+.sidebar-bottom {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.logout-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  color: #ef4444;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.logout-link:hover {
+  color: #dc2626;
+}
