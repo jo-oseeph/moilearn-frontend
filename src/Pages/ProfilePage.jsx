@@ -199,14 +199,6 @@ const ProfilePage = () => {
               <span>{user?.email}</span>
             </div>
           </div>
-
-          {/* Role */}
-          <div className="detail-field">
-            <label>Access Level</label>
-            <div className="field-display-static">
-              <span>{user?.role?.toUpperCase() || "USER"}</span>
-            </div>
-          </div>
         </div>
 
         {/* Change Password */}
