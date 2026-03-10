@@ -36,18 +36,23 @@ const AuthService = {
 
   // Check if user is authenticated
   isAuthenticated() {
-    const token = this.getToken();
-    const expiry = this.getExpiry();
+  const token = this.getToken();
+  if (!token) return false;
 
-    if (!token) return false;
-
-    if (expiry && Date.now() > expiry) {
-      this.clearAuth(); 
+ 
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    if (Date.now() >= payload.exp * 1000) {
+      this.clearAuth();
       return false;
     }
+  } catch {
+    this.clearAuth();
+    return false;
+  }
 
-    return true;
-  },
+  return true;
+},
 
   getRole() {
     const user = this.getUser();

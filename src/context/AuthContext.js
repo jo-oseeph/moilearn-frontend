@@ -30,16 +30,15 @@ export const AuthProvider = ({ children }) => {
   };
 
   const updateUser = (userData) => {
-    setUser(userData);
+  setUser(userData);
 
-    // Update in localStorage/sessionStorage as well
-    const currentToken = localStorage.getItem("token") || sessionStorage.getItem("token");
-    const expiry = localStorage.getItem("expiry") || sessionStorage.getItem("expiry");
+  const currentToken = AuthService.getToken();       
+  const expiry = AuthService.getExpiry();          
 
-    if (currentToken && expiry) {
-      AuthService.saveAuth(currentToken, userData, expiry);
-    }
-  };
+  if (currentToken && expiry) {
+    AuthService.saveAuth(currentToken, userData, expiry);
+  }
+};
 
   const role = user?.role || "user";
 
