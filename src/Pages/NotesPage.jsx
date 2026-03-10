@@ -174,13 +174,14 @@ const NotesPage = () => {
 
               <div className="card-actions">
                 <div className="action-buttons">
-                  <button
-                    className="preview-btn"
-                    onClick={() => handlePreview(note._id)}
-                    title="Preview"
-                  >
-                    <FiEye />
-                  </button>
+                 <button
+  className="preview-btn"
+  onClick={() => handlePreview(note._id)}
+  title="Preview"
+>
+  <FiEye />
+  <span className="preview-counter">{note.previewCount || 0}</span>
+</button>
 
                   <button
                     className="download-btn"
