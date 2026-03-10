@@ -1,4 +1,4 @@
-/* stats.css - changes highlighted */
+/* stats.css */
 
 .stats-section {
   padding: 40px 20px;
@@ -28,13 +28,9 @@
   justify-content: center;
   gap: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  overflow: hidden;
   text-align: center;
-  /* removed transition and hover — card is not interactive */
   cursor: default;
 }
-
-/* .stats-card:hover REMOVED */
 
 .card-icon {
   width: 48px;
@@ -46,11 +42,11 @@
   flex-shrink: 0;
 }
 
-.notes-card { background: linear-gradient(135deg, #2563eb, #3b82f6); }
-.notes-card .card-icon { background: rgba(255,255,255,0.2); color: #ffffff; }
+.notes-card    { background: linear-gradient(135deg, #2563eb, #3b82f6); }
+.notes-card    .card-icon { background: rgba(255,255,255,0.2); color: #ffffff; }
 
-.papers-card { background: linear-gradient(135deg, #16a34a, #22c55e); }
-.papers-card .card-icon { background: rgba(255,255,255,0.2); color: #ffffff; }
+.papers-card   { background: linear-gradient(135deg, #16a34a, #22c55e); }
+.papers-card   .card-icon { background: rgba(255,255,255,0.2); color: #ffffff; }
 
 .faculties-card { background: linear-gradient(135deg, #f97316, #fb923c); }
 .faculties-card .card-icon { background: rgba(255,255,255,0.2); color: #ffffff; }
@@ -99,97 +95,58 @@
   to   { opacity: 1; transform: scale(1); }
 }
 
-/* ── Swipe indicator dots (mobile only) ── */
-.swipe-dots {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .stats-section {
-    padding: 30px 0;
-  }
-
-  .stats-container {
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    padding: 0 16px;
-  }
-
-  .stats-container::-webkit-scrollbar { display: none; }
-
-  .stats-grid {
-    display: flex;
-    gap: 12px;
-    width: max-content;
-  }
-
-  .stats-card {
-    min-width: 200px;
-    max-width: 200px;
-    padding: 16px;
-    gap: 10px;
-  }
-
-  .card-icon  { width: 40px; height: 40px; }
-  .card-label { font-size: 0.8rem; }
-  .card-number { font-size: 1.5rem; }
-
-  /* Dots */
-  .swipe-dots {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 6px;
-    margin-top: 14px;
-  }
-
-  .swipe-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #c7d2fe;
-    transition: background 0.3s, transform 0.3s;
-  }
-
-  .swipe-dot.active {
-    background: #2563eb;
-    transform: scale(1.3);
-  }
-
-  /* Subtle "swipe" hint label */
-  .swipe-hint {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    margin-top: 8px;
-    font-size: 0.7rem;
-    color: #94a3b8;
-    letter-spacing: 0.02em;
-  }
-}
-
-@media (max-width: 480px) {
-  .stats-card {
-    min-width: 170px;
-    max-width: 170px;
-    padding: 14px;
-  }
-
-  .card-icon  { width: 36px; height: 36px; }
-  .card-label { font-size: 0.75rem; }
-  .card-number { font-size: 1.375rem; }
-}
-
+/* ── Tablet ── */
 @media (min-width: 769px) and (max-width: 1024px) {
-  .stats-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-
+  .stats-grid { gap: 16px; }
   .stats-card { padding: 18px; }
   .card-number { font-size: 1.75rem; }
+}
+
+/* ── Mobile — all 3 in one row, compact ── */
+@media (max-width: 768px) {
+  .stats-section {
+    padding: 24px 12px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .stats-card {
+    padding: 12px 8px;
+    gap: 6px;
+    border-radius: 10px;
+  }
+
+  .card-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+  }
+
+  .card-label {
+    font-size: 0.65rem;
+    margin-bottom: 2px;
+  }
+
+  .card-number {
+    font-size: 1.25rem;
+  }
+
+  .loading-skeleton {
+    width: 40px;
+    height: 22px;
+  }
+}
+
+/* ── Small phones ── */
+@media (max-width: 380px) {
+  .stats-grid { gap: 6px; }
+
+  .stats-card { padding: 10px 6px; }
+
+  .card-icon  { width: 28px; height: 28px; }
+  .card-label { font-size: 0.6rem; }
+  .card-number { font-size: 1.1rem; }
 }
