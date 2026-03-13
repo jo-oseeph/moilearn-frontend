@@ -19,6 +19,9 @@ import UploadNotePage from "./Pages/UploadNotePage";
 import MyUploads from "./Pages/MyUploads";
 import ProfilePage from './Pages/ProfilePage';
 
+import ForgotPassword from "./Pages/ForgotPassword";
+import ResetPassword from "./Pages/ResetPassword";
+
 // Admin pages
 import AdminLayout from "./layouts/AdminLayout";
 import AdminDashboard from "./Pages/Admin/AdminDashboard";
@@ -52,6 +55,8 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/forbidden" element={<Forbidden />} />
                 <Route path="/notes" element={<NotesPage />} />
+                <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route path="/reset-password/:token" element={<ResetPassword />} /> 
 
                 <Route
                   path="/profile"
