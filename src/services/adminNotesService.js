@@ -98,3 +98,13 @@ export const fetchNotesByStatus = async (status = "pending") => {
 
   return res.json();
 };
+
+// Preview note (admin)
+export const previewNote = (noteId) => {
+  const token = AuthService.getToken();
+
+  window.open(
+    `${API_BASE_URL}/api/notes/${noteId}/preview?token=${token}`,
+    "_blank"
+  );
+};

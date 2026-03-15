@@ -5,6 +5,7 @@ import {
   rejectNote,
   deleteNote,
   fetchNotesByStatus,
+  previewNote,
 } from "../../services/adminNotesService.js";
 import "./ManageNotes.css";
 import { FaEye, FaTrash } from "react-icons/fa";
@@ -115,7 +116,15 @@ const ManageNotes = () => {
         <div className="note-actions">
   {/* PENDING NOTES */}
   {note.status === "pending" && (
-    <>
+  <>
+    <button
+      className="icon-btn preview-icon"
+      title="Preview note"
+      onClick={() => previewNote(note._id)}
+    >
+      <FaEye />
+    </button>
+
       <button
         className="btn approve"
         disabled={actionLoading === note._id}

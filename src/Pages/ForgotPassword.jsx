@@ -64,7 +64,7 @@ const ForgotPassword = () => {
             {error && (
               <div className="fp-error-alert">
                 <p>{error}</p>
-              </div>
+              </div> 
             )}
 
             <form onSubmit={handleSubmit} className="fp-form">
