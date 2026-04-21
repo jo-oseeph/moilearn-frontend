@@ -20,21 +20,10 @@ function Sidebar() {
 
         {/* Brand */}
         <div className="sidebar-brand">
-          <div className="brand-dot">M</div>
           <span className="brand-name">Moilearn</span>
         </div>
 
-        {/* Profile */}
-        <div className="sidebar-profile">
-          <div className="avatar-circle">A</div>
-          <div className="admin-info">
-            <span className="admin-name">Admin</span>
-            <span className="admin-role">Administrator</span>
-          </div>
-        </div>
-
         {/* Nav */}
-        <p className="nav-label">Menu</p>
         <nav>
           <ul>
             {navLinks.map(({ to, icon: Icon, label }) => (
